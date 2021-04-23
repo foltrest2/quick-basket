@@ -54,4 +54,41 @@ public class GenericBinarySearchTree<K extends Comparable<K>,V> {
 	public boolean treeIsEmpty() {	
 		return root == null;
 	}
+	
+    public Node<K,V> min() {
+    	if (root == null) {
+    		return null;
+    	}
+    	Node<K,V> min = root;
+        while (min.getLeft() != null) {
+        	min = min.getLeft();
+        }
+        return min;
+    }
+
+	public Node<K,V> max() {
+    	if (root == null) {
+    		return null;
+    	}
+    	Node<K,V> max = root;
+        while (max.getRight() != null) {
+        	max = max.getRight();
+        }
+        return max;
+    }
+    
+    public String preOrder() {
+        return preOrderRecursive(this.root).trim();
+    }
+    
+    public String preOrderRecursive(Node<K, V> root) {
+    	if (root == null) {
+    		return "";
+    	}
+    	String s = "";
+    	s += " " + root.getValues().toString();
+    	s += preOrderRecursive(root.getLeft());
+    	s += preOrderRecursive(root.getRight());
+    	return s;	
+    }
 }
