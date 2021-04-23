@@ -13,6 +13,7 @@ public class Node<K extends Comparable<K>,V> {
 	public Node(K key, V value) {
 		this.key = key;
 		values = new ArrayList<V>();
+		values.add(value);
 	}
 
 	public void addElement(V newValue){
