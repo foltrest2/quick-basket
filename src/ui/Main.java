@@ -7,9 +7,7 @@ import model.QuickBasketManager;
 public class Main {
 
 	private static QuickBasketManager qbm;
-
 	public Main() {
-
 	}
 
 	public static void start() {
