@@ -301,7 +301,7 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Returns sorted list of keys greater than key.  Size of list
 	 * will not exceed maxReturned
@@ -309,18 +309,18 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 	 * @param maxReturned Maximum number of results to return
 	 * @return List of keys greater than key.  List may not exceed maxReturned
 	 */
-	public List<K> getGreaterThan(K key, Integer maxReturned) {
-		List<K> list = new ArrayList<>();
+	public List<V> getGreaterThan(K key, Integer maxReturned) {
+		ArrayList<V> list = new ArrayList<>();
 		getGreaterThan(root, key, list);
 		return list.subList(0, Math.min(maxReturned, list.size()));
 	}
 
-	private void getGreaterThan(Node<K,V> node, K key, List<K> list) {
+	private void getGreaterThan(Node<K,V> node, K key, List<V> list) {
 		if (isnull(node)) {
 			return;
 		} else if (node.key.compareTo(key) > 0) {
 			getGreaterThan(node.left, key, list);
-			list.add(node.key);
+			list.addAll(node.values);
 			getGreaterThan(node.right, key, list);
 		} else {
 			getGreaterThan(node.right, key, list);

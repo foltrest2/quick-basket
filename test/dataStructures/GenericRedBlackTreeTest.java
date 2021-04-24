@@ -84,5 +84,6 @@ class GenericRedBlackTreeTest {
         assertEquals(new Integer(4), testTree.search("A").get(0), "Test failed");
         assertEquals(new Integer(5), testTree.search("B").get(0), "Test failed");
         assertEquals(new Integer(6), testTree.search("E").get(1), "Test failed");
+        assertEquals("E", testTree.max().getKey(), "Test failed");
     }
 }
