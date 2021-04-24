@@ -14,6 +14,7 @@ public class QuickBasketManager {
 	private GenericAVLTree<Double,Player> secondAVL;
 	private GenericAVLTree<Double,Player> thirdAVL;
 	private GenericAVLTree<Double,Player> fourthAVL;
+	private GenericRedBlackTree<Double,Player> firstRedBlack;
 	private ArrayList<Player> playersList;
 	private final static String SEPARATOR = ",";
 	public final static String SAVE_PATH_FILE = "data/FBAdata.csv";
@@ -25,20 +26,21 @@ public class QuickBasketManager {
 		thirdAVL = new GenericAVLTree<>();
 		fourthAVL = new GenericAVLTree<>();
 		playersList = new ArrayList<>();
+		firstRedBlack = new GenericRedBlackTree<>();
 	}
 
 
-	public ArrayList<Player> searchUniqueParameter(int option, double parameter, int searchGreaterThan){
+	public ArrayList<Player> searchUniqueParameter(int option, double key, int searchGreaterThan){
 		ArrayList<Player> found = new ArrayList<>();
 		switch (option) {
 		case 1:
 			//Search by pointsPerGame
-			found = firstxd.search(parameter);
+			found = firstxd.search(key);
 			break;
 
 		case 2:
 			//Search by reboundsPerGame
-			found = firstAVL.search(parameter);
+			found = firstAVL.search(key);
 			break;
 
 		case 3:
@@ -48,14 +50,14 @@ public class QuickBasketManager {
 
 			break;
 		case 5:
-
+			found = firstRedBlack.search(key);
 			break;
 		case 6:
 			switch (searchGreaterThan) {
 			case 0:
 				//Search by generalEvaluation player list lineal
 				for (int i = 0; i < playersList.size(); i++) {
-					if(playersList.get(i).getGeneralEvaluation() <= parameter) {
+					if(playersList.get(i).getAge() <= key) {
 						found.add(playersList.get(i));
 					}
 				}
@@ -64,7 +66,7 @@ public class QuickBasketManager {
 			case 1:
 				//Search by generalEvaluation player list lineal
 				for (int i = 0; i < playersList.size(); i++) {
-					if(playersList.get(i).getGeneralEvaluation() >= parameter) {
+					if(playersList.get(i).getAge() >= key) {
 						found.add(playersList.get(i));
 					}
 				}
@@ -73,7 +75,7 @@ public class QuickBasketManager {
 			case 2:
 				//Search by generalEvaluation player list lineal
 				for (int i = 0; i < playersList.size(); i++) {
-					if(playersList.get(i).getGeneralEvaluation() == parameter) {
+					if(playersList.get(i).getAge() == key) {
 						found.add(playersList.get(i));
 					}
 				}
@@ -110,6 +112,7 @@ public class QuickBasketManager {
 			secondAVL.insert(assistsPerGame, toAdd);
 			thirdAVL.insert(robberiesPerGame, toAdd);
 			fourthAVL.insert(blocksPerGame, toAdd);
+			firstRedBlack.insert(generalEvaluation, toAdd);
 			playersList.add(toAdd);
 			line = br.readLine();
 		}
@@ -117,6 +120,9 @@ public class QuickBasketManager {
 	}
 
 	public String checkImport() {
-		return firstxd.preOrder();
+//		return firstxd.preOrder();
+//		return firstAVL.preOrder();
+		return firstRedBlack.preOrder();
+		
 	}
 }

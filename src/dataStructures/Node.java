@@ -6,7 +6,6 @@ public class Node<K extends Comparable<K>,V> {
 	
     public static final int BLACK = 0;
     public static final int RED = 1;
-    
 	Node<K,V> father;
 	Node<K,V> left;
 	Node<K,V> right;

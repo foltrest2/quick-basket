@@ -86,7 +86,7 @@ public class GenericBinarySearchTree<K extends Comparable<K>,V> {
     		return "";
     	}
     	String s = "";
-    	s += " " + root.getValues().toString()+"\n";
+    	s += " " + root.getValues().toString();
     	s += preOrderRecursive(root.getLeft());
     	s += preOrderRecursive(root.getRight());
     	return s;	
