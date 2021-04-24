@@ -1,6 +1,7 @@
 package model;
 
-public class Player {
+public class Player{
+	private int id;
     private String fullName;
     private int age;
     private String team;
@@ -11,8 +12,9 @@ public class Player {
     private double blocksPerGame;
     private double generalEvaluation;
     
-	public Player(String fullName, int age, String team, double pointsPerGame, double reboundsPerGame,
+	public Player(int id, String fullName, int age, String team, double pointsPerGame, double reboundsPerGame,
 			double assistsPerGame, double robberiesPerGame, double blocksPerGame, double generalEvaluation) {
+		this.id = id;
 		this.fullName = fullName;
 		this.age = age;
 		this.team = team;
@@ -24,6 +26,14 @@ public class Player {
 		this.generalEvaluation = generalEvaluation;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getFullName() {
 		return fullName;
 	}
