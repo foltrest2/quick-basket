@@ -3,12 +3,21 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import dataStructures.*;
 
 public class QuickBasketManager {
 
+
+	private GenericBinarySearchTree<Double,Player> firstxd;
 	private final static String SEPARATOR = ",";
 	public final static String SAVE_PATH_FILE = "data/FBAdata.csv";
-	
+
+
+
+	public QuickBasketManager() {
+		firstxd = new GenericBinarySearchTree<>();
+	}
+
 
 	public void importData() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(SAVE_PATH_FILE));
@@ -16,11 +25,23 @@ public class QuickBasketManager {
 		String line = br.readLine();
 		while(line!=null) {
 			String[] parts = line.split(SEPARATOR);
-			String name = parts[0];
-			String nit = parts[1];
-			addRestaurant(name,nit,manager);
+			String fullName = parts[0];
+			int age = Integer.parseInt(parts[1]);
+			String team = parts[2];
+			double pointsPerGame = Double.parseDouble(parts[3]);
+			double reboundsPerGame = Double.parseDouble(parts[4]);
+			double assistsPerGame = Double.parseDouble(parts[5]);
+			double robberiesPerGame = Double.parseDouble(parts[6]);
+			double blocksPerGame = Double.parseDouble(parts[7]);
+			double generalEvaluation = Double.parseDouble(parts[8]);
+			Player toAdd = new Player(fullName, age, team, pointsPerGame, reboundsPerGame, assistsPerGame, robberiesPerGame, blocksPerGame, generalEvaluation);
+			firstxd.put(pointsPerGame, toAdd);
 			line = br.readLine();
 		}
 		br.close();
+	}
+	
+	public String checkImport() {
+		return firstxd.preOrder();
 	}
 }

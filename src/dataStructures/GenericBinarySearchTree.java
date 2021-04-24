@@ -81,12 +81,12 @@ public class GenericBinarySearchTree<K extends Comparable<K>,V> {
         return preOrderRecursive(this.root).trim();
     }
     
-    public String preOrderRecursive(Node<K, V> root) {
+    private String preOrderRecursive(Node<K, V> root) {
     	if (root == null) {
     		return "";
     	}
     	String s = "";
-    	s += " " + root.getValues().toString();
+    	s += " " + root.getValues().toString()+"\n";
     	s += preOrderRecursive(root.getLeft());
     	s += preOrderRecursive(root.getRight());
     	return s;	

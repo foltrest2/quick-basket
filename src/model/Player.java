@@ -95,4 +95,12 @@ public class Player {
 	public void setGeneralEvaluation(double generalEvaluation) {
 		this.generalEvaluation = generalEvaluation;
 	}
+
+	@Override
+	public String toString() {
+		return "Player [fullName=" + fullName + ", age=" + age + ", team=" + team + ", pointsPerGame=" + pointsPerGame
+				+ ", reboundsPerGame=" + reboundsPerGame + ", assistsPerGame=" + assistsPerGame + ", robberiesPerGame="
+				+ robberiesPerGame + ", blocksPerGame=" + blocksPerGame + ", generalEvaluation=" + generalEvaluation
+				+ "]";
+	}
 }
