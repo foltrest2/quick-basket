@@ -131,13 +131,19 @@ public class GenericAVLTree<K extends Comparable<K>,V> {
 		update(newParent);
 		return newParent;
 	}
-
-	public boolean validateBSTInvarient(Node<K,V> node) {
-		if (node == null) return true;
-		K key = node.getKey();
-		boolean isValid = true;
-		if (node.getLeft() != null) isValid = isValid && node.getLeft().getKey().compareTo(key) < 0;
-		if (node.getRight() != null) isValid = isValid && node.getRight().getKey().compareTo(key) > 0;
-		return isValid && validateBSTInvarient(node.getLeft()) && validateBSTInvarient(node.getRight());
-	}
+	
+    public String preOrder() {
+        return preOrderRecursive(this.root).trim();
+    }
+    
+    private String preOrderRecursive(Node<K, V> root) {
+    	if (root == null) {
+    		return "";
+    	}
+    	String s = "";
+    	s += " " + root.getValues().toString();
+    	s += preOrderRecursive(root.getLeft());
+    	s += preOrderRecursive(root.getRight());
+    	return s;	
+    }
 }

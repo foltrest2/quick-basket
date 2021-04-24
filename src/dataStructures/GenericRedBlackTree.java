@@ -343,4 +343,18 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 		return root.numLeft + root.numRight + 1;
 	}
 
+    public String preOrder() {
+        return preOrderRecursive(this.root).trim();
+    }
+    
+    private String preOrderRecursive(Node<K, V> root) {
+    	if (root == null) {
+    		return "";
+    	}
+    	String s = "";
+    	s += " " + root.getValues().toString();
+    	s += preOrderRecursive(root.getLeft());
+    	s += preOrderRecursive(root.getRight());
+    	return s;	
+    }
 }
