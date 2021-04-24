@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import dataStructures.*;
@@ -18,7 +20,7 @@ public class QuickBasketManager {
 	private GenericRedBlackTree<Double,Player> RedBlackGeneralEvaluation;
 	private List<Player> playersList;
 	private final static String SEPARATOR = ",";
-	public final static String SAVE_PATH_FILE = "data/FBAdata.csv";
+	public final static String SAVE_PATH_FILE = "data/FBAdatav2.csv";
 
 	public QuickBasketManager() {
 		BSTPointsPerGame = new GenericBinarySearchTree<>();
@@ -181,16 +183,17 @@ public class QuickBasketManager {
 		String line = br.readLine();
 		while(line!=null) {
 			String[] parts = line.split(SEPARATOR);
-			String fullName = parts[0];
-			int age = Integer.parseInt(parts[1]);
-			String team = parts[2];
-			double pointsPerGame = Double.parseDouble(parts[3]);
-			double reboundsPerGame = Double.parseDouble(parts[4]);
-			double assistsPerGame = Double.parseDouble(parts[5]);
-			double robberiesPerGame = Double.parseDouble(parts[6]);
-			double blocksPerGame = Double.parseDouble(parts[7]);
-			double generalEvaluation = Double.parseDouble(parts[8]);
-			Player toAdd = new Player(fullName, age, team, pointsPerGame, reboundsPerGame, assistsPerGame, robberiesPerGame, blocksPerGame, generalEvaluation);
+			int id = Integer.parseInt(parts[0]);
+			String fullName = parts[1];
+			int age = Integer.parseInt(parts[2]);
+			String team = parts[3];
+			double pointsPerGame = Double.parseDouble(parts[4]);
+			double reboundsPerGame = Double.parseDouble(parts[5]);
+			double assistsPerGame = Double.parseDouble(parts[6]);
+			double robberiesPerGame = Double.parseDouble(parts[7]);
+			double blocksPerGame = Double.parseDouble(parts[8]);
+			double generalEvaluation = Double.parseDouble(parts[9]);
+			Player toAdd = new Player(id, fullName, age, team, pointsPerGame, reboundsPerGame, assistsPerGame, robberiesPerGame, blocksPerGame, generalEvaluation);
 			BSTPointsPerGame.put(pointsPerGame, toAdd);
 			AVLReboundsPerGame.insert(reboundsPerGame, toAdd);
 			AVLAssistPerGame.insert(assistsPerGame, toAdd);
@@ -203,6 +206,45 @@ public class QuickBasketManager {
 		br.close();
 	}
 
+	public void reset() {
+		BSTPointsPerGame = null;
+		AVLReboundsPerGame = null;
+		AVLAssistPerGame  = null;
+		AVLRobberiesPerGame = null;
+		AVLBlocksPerGame = null;
+		playersList.clear();
+		RedBlackGeneralEvaluation = null;
+	}
+	
+	public String addNewPlayer(int id, String fullName, int age, String team, double pointsPerGame, double reboundsPerGame,
+			double assistsPerGame, double robberiesPerGame, double blocksPerGame, double generalEvaluation) {
+		String info = "";
+		if(!binarySearchPlayer(id)) {
+			Player toAdd = new Player(id, fullName, age, team, pointsPerGame, reboundsPerGame, assistsPerGame, robberiesPerGame, blocksPerGame, generalEvaluation);
+			playersList.add(toAdd);
+			info += "Player added!";
+		} else {
+			info += "Player already exist!";
+		}	
+		return info;		
+	}
+	public boolean binarySearchPlayer(int id) {
+		boolean found = false;
+		int start = 0;
+		int end = playersList.size()-1;
+		while (!found && start <= end) {
+			int middle = (start + end)/2;
+			if (playersList.get(middle).getId() == id) {
+				found = true;
+			} else if((id - playersList.get(middle).getId()) < 1){
+				end = middle -1;
+			} else {
+				start = middle +1;
+			}			
+		}
+		return found;
+	}
+	
 	public String checkImport() {
 //				return BSTPointsPerGame.preOrder();
 //				return AVLReboundsPerGame.preOrder();

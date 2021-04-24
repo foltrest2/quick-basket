@@ -37,7 +37,7 @@ public class Main {
 //		System.out.println(qbm.searchUniqueParameter(2,500,2));
 		//Checking for redBlack
 //		System.out.println(qbm.searchUniqueParameter(6,2,0));
-		
+		System.out.println(qbm.binarySearchPlayer(200000));
 		
 		double elapsedTime = System.nanoTime() - start;
 		double elapsedTimeFinal = elapsedTime /1000000000;
