@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-
 class GenericBinarySearchTreeTest {
 
     GenericBinarySearchTree<String, Integer> testTree;
@@ -39,7 +38,6 @@ class GenericBinarySearchTreeTest {
         testTree.put("A", 8);
         testTree.put("B", 9);
     }
-
 
     @Test
     public void InsertTest() {

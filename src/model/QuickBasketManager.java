@@ -89,7 +89,6 @@ public class QuickBasketManager {
 		return found;
 	}
 
-
 	public void importData() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(SAVE_PATH_FILE));
 		br.readLine();
