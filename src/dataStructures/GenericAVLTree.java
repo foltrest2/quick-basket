@@ -27,9 +27,7 @@ public class GenericAVLTree<K extends Comparable<K>,V> {
 	public boolean isEmpty() {
 		return size() == 0;
 	}
-	public boolean contains(K key) {
-		return contains(root, key);
-	}
+
 	public ArrayList<V> search(K key) {	
 		if(root != null) {
 			Node<K,V> toLookAt = searchRecursive(key,root);
@@ -51,35 +49,25 @@ public class GenericAVLTree<K extends Comparable<K>,V> {
 		}		
 	}
 
-	private boolean contains(Node<K,V> node, K key) {
-		if (node == null) return false;
-		int cmp = key.compareTo(node.getKey());
-
-		if (cmp < 0) return contains(node.getLeft(), key );
-		if (cmp > 0) return contains(node.getRight(), key);
-
-		return true;
-	}
-
 	public void insert(K key, V value) {
-		if (!contains(root, key)) {
-			root = insert(root, key, value);
-			nodeCount++;
-		}
+	
+		root = insert(root, key, value); 
 	}
-
 	private Node<K,V> insert(Node<K,V> node, K key, V value) {
-		if (node == null) return new Node<K,V>(key,value);
+		if (node == null) {
+			return new Node<K,V>(key, value);	
+		}
 		int cmp = key.compareTo(node.getKey());
 		if (cmp < 0) {
-
 			node.setLeft(insert(node.getLeft(), key, value));
-		} else if(cmp > 0){
+		}
+		else if (cmp > 0) {
 			node.setRight(insert(node.getRight(), key, value));
-		}else {
-
+		}
+		else if (cmp == 0) {
 			node.getValues().add(value);
 		}
+
 		update(node);
 		return balance(node);
 	}

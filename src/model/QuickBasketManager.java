@@ -3,10 +3,11 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import dataStructures.*;
 
 public class QuickBasketManager {
-
 
 	private GenericBinarySearchTree<Double,Player> firstxd;
 	private GenericAVLTree<Double,Player> firstAVL;
@@ -16,16 +17,13 @@ public class QuickBasketManager {
 	private final static String SEPARATOR = ",";
 	public final static String SAVE_PATH_FILE = "data/FBAdata.csv";
 
-
-
 	public QuickBasketManager() {
 		firstxd = new GenericBinarySearchTree<>();
 		firstAVL = new GenericAVLTree<>();
 		secondAVL  = new GenericAVLTree<>();
 		thirdAVL = new GenericAVLTree<>();
-		fourthAVL = new GenericAVLTree<>();
+		fourthAVL = new GenericAVLTree<>();	
 	}
-
 
 	public void importData() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(SAVE_PATH_FILE));
