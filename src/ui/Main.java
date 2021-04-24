@@ -25,8 +25,11 @@ public class Main {
 		} catch (IOException e) {	
 			e.printStackTrace();
 		}
-		
+
+//		System.out.println(qbm.searchUniqueParameter(1,1));
 		//		System.out.println(qbm.checkImport());
+		System.out.println(qbm.searchUniqueParameter(2,500,0));
+//		System.out.println(qbm.searchUniqueParameter(6,1));
 	}
 
 }

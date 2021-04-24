@@ -50,8 +50,7 @@ public class GenericAVLTree<K extends Comparable<K>,V> {
 	}
 
 	public void insert(K key, V value) {
-	
-		root = insert(root, key, value); 
+			root = insert(root, key, value);
 	}
 	private Node<K,V> insert(Node<K,V> node, K key, V value) {
 		if (node == null) {
@@ -63,8 +62,7 @@ public class GenericAVLTree<K extends Comparable<K>,V> {
 		}
 		else if (cmp > 0) {
 			node.setRight(insert(node.getRight(), key, value));
-		}
-		else if (cmp == 0) {
+		}else if (cmp == 0){
 			node.getValues().add(value);
 		}
 
