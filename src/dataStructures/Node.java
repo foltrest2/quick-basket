@@ -4,17 +4,16 @@ import java.util.ArrayList;
 
 public class Node<K extends Comparable<K>,V> {
 
-
-	
     public static final int BLACK = 0;
     public static final int RED = 1;
-	Node<K,V> father;
-	Node<K,V> left;
-	Node<K,V> right;
-	K key;
-    public int numLeft;
-    public int numRight;
-    public int color;
+    
+	private Node<K,V> father;
+	private Node<K,V> left;
+	private Node<K,V> right;
+	private K key;
+	private int numLeft;
+	private int numRight;
+	private int color;
     private int heigth;
 	private int balancef;
 	ArrayList<V> values;
@@ -63,6 +62,30 @@ public class Node<K extends Comparable<K>,V> {
 	public void setRight(Node<K, V> right) {
 		this.right = right;
 	}
+	
+	public int getNumLeft() {
+		return numLeft;
+	}
+
+	public void setNumLeft(int numLeft) {
+		this.numLeft = numLeft;
+	}
+
+	public int getNumRight() {
+		return numRight;
+	}
+
+	public void setNumRight(int numRight) {
+		this.numRight = numRight;
+	}
+
+	public int getColor() {
+		return color;
+	}
+
+	public void setColor(int color) {
+		this.color = color;
+	}
 
 	public K getKey() {
 		return key;
@@ -76,7 +99,6 @@ public class Node<K extends Comparable<K>,V> {
 		
 	}
 	public void setHeight(int h) {
-		
         heigth = h;
 	}
 

@@ -30,88 +30,80 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 
 	private void leftRotateFixup(Node<K,V> x){
 
-		// Case 1: Only x, x.getRight() and x.getRight().right always are not null.
-		if (isnull(x.getLeft()) && isnull(x.getRight().left)){
-			x.numLeft = 0;
-			x.numRight = 0;
-			x.getRight().numLeft = 1;
+		// Case 1: Only x, x.getRight() and x.getRight().getRight() always are not null.
+		if (isnull(x.getLeft()) && isnull(x.getRight().getLeft())){
+			x.setNumLeft(0);
+			x.setNumRight(0);
+			x.getRight().setNumLeft(1);
 		}
 
-		// Case 2: x.getRight().left also exists in addition to Case 1
-		else if (isnull(x.getLeft()) && !isnull(x.getRight().left)){
-			x.numLeft = 0;
-			x.numRight = 1 + x.getRight().left.numLeft +
-					x.getRight().left.numRight;
-			x.getRight().numLeft = 2 + x.getRight().left.numLeft +
-					x.getRight().left.numRight;
+		// Case 2: x.getRight().getLeft() also exists in addition to Case 1
+		else if (isnull(x.getLeft()) && !isnull(x.getRight().getLeft())){
+			x.setNumLeft(0);
+			x.setNumRight(1 + x.getRight().getLeft().getNumLeft() + x.getRight().getLeft().getNumRight());
+			x.getRight().setNumLeft(2 + x.getRight().getLeft().getNumLeft() + x.getRight().getLeft().getNumRight());
 		}
 
 		// Case 3: x.getLeft() also exists in addition to Case 1
-		else if (!isnull(x.getLeft()) && isnull(x.getRight().left)){
-			x.numRight = 0;
-			x.getRight().numLeft = 2 + x.getLeft().numLeft + x.getLeft().numRight;
+		else if (!isnull(x.getLeft()) && isnull(x.getRight().getLeft())){
+			x.setNumRight(0);
+			x.getRight().setNumLeft(2 + x.getLeft().getNumLeft() + x.getLeft().getNumRight());
 
 		}
-		// Case 4: x.getLeft() and x.getRight().left both exist in addtion to Case 1
+		// Case 4: x.getLeft() and x.getRight().getLeft() both exist in addtion to Case 1
 		else{
-			x.numRight = 1 + x.getRight().left.numLeft +
-					x.getRight().left.numRight;
-			x.getRight().numLeft = 3 + x.getLeft().numLeft + x.getLeft().numRight +
-					x.getRight().left.numLeft + x.getRight().left.numRight;
+			x.setNumRight(1 + x.getRight().getLeft().getNumLeft() + x.getRight().getLeft().getNumRight());
+			x.getRight().setNumLeft(3 + x.getLeft().getNumLeft() + x.getLeft().getNumRight() + x.getRight().getLeft().getNumLeft() + x.getRight().getLeft().getNumRight());
 		}
 
 	}// end leftRotateFixup(Node x)
 
 	private void rightRotate(Node<K,V> y){
 		rightRotateFixup(y);
-		Node<K,V> x = y.left;
-		y.left = x.getRight();
+		Node<K,V> x = y.getLeft();
+		y.setLeft(x.getRight());
 
 		if (!isnull(x.getRight()))
-			x.getRight().father = y;
-		x.father = y.father;
+			x.getRight().setFather(y);
+		x.setFather(y.getFather());
 
-		if (isnull(y.father))
+		if (isnull(y.getFather()))
 			root = x;
 
-		else if (y.father.right == y)
-			y.father.right = x;
+		else if (y.getFather().getRight() == y)
+			y.getFather().setRight(x);
 
 		else
-			y.father.left = x;
-		x.right = y;
+			y.getFather().setLeft(x);
+		x.setRight(y);
 
-		y.father = x;
+		y.setFather(x);
 
 	}
 
 	private void rightRotateFixup(Node<K,V> y){
 
-		if (isnull(y.right) && isnull(y.left.right)){
-			y.numRight = 0;
-			y.numLeft = 0;
-			y.left.numRight = 1;
+		if (isnull(y.getRight()) && isnull(y.getLeft().getRight())){
+			y.setNumRight(0);
+			y.setNumLeft(0);
+			y.getLeft().setNumRight(1);
 		}
 
-		else if (isnull(y.right) && !isnull(y.left.right)){
-			y.numRight = 0;
-			y.numLeft = 1 + y.left.right.numRight +
-					y.left.right.numLeft;
-			y.left.numRight = 2 + y.left.right.numRight +
-					y.left.right.numLeft;
+		else if (isnull(y.getRight()) && !isnull(y.getLeft().getRight())){
+			y.setNumRight(0);
+			y.setNumLeft(1 + y.getLeft().getRight().getNumRight() + y.getLeft().getRight().getNumLeft());
+			y.getLeft().setNumRight(2 + y.getLeft().getRight().getNumRight() +	y.getLeft().getRight().getNumLeft());
 		}
 
-		else if (!isnull(y.right) && isnull(y.left.right)){
-			y.numLeft = 0;
-			y.left.numRight = 2 + y.right.numRight +y.right.numLeft;
+		else if (!isnull(y.getRight()) && isnull(y.getLeft().getRight())){
+			y.setNumLeft(0);
+			y.getLeft().setNumRight(2 + y.getRight().getNumRight() +y.getRight().getNumLeft());
 		}
 
 		else{
-			y.numLeft = 1 + y.left.right.numRight +
-					y.left.right.numLeft;
-			y.left.numRight = 3 + y.right.numRight +
-					y.right.numLeft +
-					y.left.right.numRight + y.left.right.numLeft;
+			y.setNumLeft(1 + y.getLeft().getRight().getNumRight() + y.getLeft().getRight().getNumLeft());
+			y.getLeft().setNumRight(3 + y.getRight().getNumRight() + y.getRight().getNumLeft() + y.getLeft().getRight().getNumRight() 
+					+ y.getLeft().getRight().getNumLeft());
 		}
 
 	}
@@ -130,43 +122,43 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 		while (!isnull(x)){
 			y = x;
 
-			// if z.key is < than the current key, go left
-			if (z.key.compareTo(x.key) < 0){
+			// if z.getKey() is < than the current key, go left
+			if (z.getKey().compareTo(x.getKey()) < 0){
 
-				// Update x.numLeft as z is < than x
-				x.numLeft++;
+				// Update x.getNumLeft() as z is < than x
+				x.setNumLeft(x.getNumLeft()+1);
 				x = x.getLeft();
 			}
 
-			// else z.key >= x.key so go right.
-			else if(z.key.compareTo(x.key) > 0){
+			// else z.getKey() >= x.getKey() so go right.
+			else if(z.getKey().compareTo(x.getKey()) > 0){
 
 				// Update x.numGreater as z is => x
-				x.numRight++;
+				x.setNumRight(x.getNumRight()+1);
 				x = x.getRight();
 			}
 			else {
-				x.values.add(value);
+				x.getValues().add(value);
 				x = null;
 				return;
 			}
 		}
 		// y will hold z's father
-		z.father = y;
+		z.setFather(y);
 
-		// Depending on the value of y.key, put z as the left or
+		// Depending on the value of y.getKey(), put z as the left or
 		// right child of y
 		if (isnull(y))
 			root = z;
-		else if (z.key.compareTo(y.key) < 0)
-			y.left = z;
+		else if (z.getKey().compareTo(y.getKey()) < 0)
+			y.setLeft(z);
 		else
-			y.right = z;
+			y.setRight(z);
 
 		// Initialize z's children to null and z's color to red
-		z.left = null;
-		z.right = null;
-		z.color = Node.RED;
+		z.setLeft(null);
+		z.setRight(null);
+		z.setColor(Node.RED);
 
 		// Call insertFixup(z)
 		insertFixup(z);
@@ -177,78 +169,76 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 
 		Node<K,V> y = null;
 		// While there is a violation of the RedBlackTree properties..
-		if (z.father != null) {
-			while ((z.father != null)&&(z.father.color == Node.RED)){
+		if (z.getFather() != null) {
+			while ((z.getFather() != null)&&(z.getFather().getColor() == Node.RED)){
 				// If z's father is the the left child of it's father.
-				if (z.father.father != null) {
-					if (z.father == z.father.father.left){
+				if (z.getFather().getFather() != null) {
+					if (z.getFather() == z.getFather().getFather().getLeft()){
 
 						// Initialize y to z 's cousin
-						y = z.father.father.right;
+						y = z.getFather().getFather().getRight();
 
 						// Case 1: if y is red...recolor
 						if (y != null) {
-							if (y.color == Node.RED){
-								z.father.color = Node.BLACK;
-								y.color = Node.BLACK;
-								z.father.father.color = Node.RED;
-								z = z.father.father;
+							if (y.getColor() == Node.RED){
+								z.getFather().setColor(Node.BLACK);
+								y.setColor(Node.BLACK);
+								z.getFather().getFather().setColor(Node.RED);
+								z = z.getFather().getFather();
 							}
 						}
 						// Case 2: if y is black & z is a right child
-						else if (z == z.father.right){
+						else if (z == z.getFather().getRight()){
 
 							// leftRotaet around z's father
-							z = z.father;
+							z = z.getFather();
 							leftRotate(z);
-							z = z.father.father;
-							rightRotateFixup(z);
+							z = z.getFather().getFather();
 							rightRotate(z);
 						}
 
 						// Case 3: else y is black & z is a left child
 						else{
 							// recolor and rotate round z's grandpa
-							z.father.color = Node.BLACK;
-							z.father.father.color = Node.RED;
-							rightRotate(z.father.father);
+							z.getFather().setColor(Node.BLACK);
+							z.getFather().getFather().setColor(Node.RED);
+							rightRotate(z.getFather().getFather());
 						}
 					}
 					// If z's father is the right child of it's father.
 					else{
 						// Initialize y to z's cousin
-						y = z.father.father.left;
+						y = z.getFather().getFather().getLeft();
 
 						// Case 1: if y is red...recolor
 						if (y != null) {
-							if (y.color == Node.RED){
-								z.father.color = Node.BLACK;
-								y.color = Node.BLACK;
-								z.father.father.color = Node.RED;
-								z = z.father.father;
+							if (y.getColor() == Node.RED){
+								z.getFather().setColor(Node.BLACK);
+								y.setColor(Node.BLACK);
+								z.getFather().getFather().setColor(Node.RED);
+								z = z.getFather().getFather();
 							}
 						}
 						// Case 2: if y is black and z is a left child
-						else if (z == z.father.left){
+						else if (z == z.getFather().getLeft()){
 							// rightRotate around z's father
-							z = z.father;
+							z = z.getFather();
 							rightRotate(z);
-							z = z.father.father;
-							leftRotateFixup(z);
+							z = z.getFather().getFather();
 							leftRotate(z);
 						}
 						// Case 3: if y  is black and z is a right child
 						else{
 							// recolor and rotate around z's grandpa
-							z.father.color = Node.BLACK;
-							z.father.father.color = Node.RED;
-							leftRotate(z.father.father);
+							z.getFather().setColor(Node.BLACK);
+							z.getFather().getFather().setColor(Node.RED);
+							leftRotate(z.getFather().getFather());
 						}
 					}
 				}
-				if (z.father != null) {
-					if (z.father.color == Node.RED) {
-						z.father.color = Node.BLACK;
+				if (z.getFather() != null) {
+					if (z.getFather().getColor() == Node.RED) {
+						z.getFather().setColor(Node.BLACK);
 					}
 				}
 
@@ -256,13 +246,13 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 
 
 			// Color root black at all times
-			root.color = Node.BLACK;
+			root.setColor(Node.BLACK);
 		}
 	}// end insertFixup(Node z)
 
 	public Node<K,V> treeMinimum(Node<K,V> node){
-		while (!isnull(node.left))
-			node = node.left;
+		while (!isnull(node.getLeft()))
+			node = node.getLeft();
 		return node;
 	}
 
@@ -276,10 +266,10 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 		Node<K,V> y = x.getFather();
 
 		// while x is it's father's right child...
-		while (!isnull(y) && x == y.right){
+		while (!isnull(y) && x == y.getRight()){
 			// Keep moving up in the tree
 			x = y;
-			y = y.father;
+			y = y.getFather();
 		}
 		// Return successor
 		return y;
@@ -292,12 +282,12 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 	public ArrayList<V> search(K key){
 		Node<K,V> current = root;
 		while (!isnull(current)){
-			if (current.key.equals(key))
-				return current.values;
-			else if (current.key.compareTo(key) < 0)
-				current = current.right;
+			if (current.getKey().equals(key))
+				return current.getValues();
+			else if (current.getKey().compareTo(key) < 0)
+				current = current.getRight();
 			else
-				current = current.left;
+				current = current.getLeft();
 		}
 		return null;
 	}
@@ -318,21 +308,21 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 	private void getGreaterThan(Node<K,V> node, K key, List<K> list) {
 		if (isnull(node)) {
 			return;
-		} else if (node.key.compareTo(key) > 0) {
-			getGreaterThan(node.left, key, list);
-			list.add(node.key);
-			getGreaterThan(node.right, key, list);
+		} else if (node.getKey().compareTo(key) > 0) {
+			getGreaterThan(node.getLeft(), key, list);
+			list.add(node.getKey());
+			getGreaterThan(node.getRight(), key, list);
 		} else {
-			getGreaterThan(node.right, key, list);
+			getGreaterThan(node.getRight(), key, list);
 		}
 	}
 
 	public int findNumSmaller(Node<K,V> node, K key){
 		if (isnull(node)) return 0;
-		else if (key.compareTo(node.key) <= 0)
-			return findNumSmaller(node.left,key);
+		else if (key.compareTo(node.getKey()) <= 0)
+			return findNumSmaller(node.getLeft(),key);
 		else
-			return 1+ node.numLeft + findNumSmaller(node.right,key);
+			return 1+ node.getNumLeft() + findNumSmaller(node.getRight(),key);
 	}
 
 	private boolean isnull(Node<K,V> node){
@@ -340,7 +330,7 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 	}
 
 	public int size(){
-		return root.numLeft + root.numRight + 1;
+		return root.getNumLeft() + root.getNumRight() + 1;
 	}
 
 }
