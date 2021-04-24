@@ -9,6 +9,8 @@ public class Node<K extends Comparable<K>,V> {
 	private Node<K,V> right;
 	private K key;
 	private ArrayList<V> values;
+	private int heigth;
+	private int balancef;
 
 	public Node(K key, V value) {
 		this.key = key;
@@ -59,5 +61,21 @@ public class Node<K extends Comparable<K>,V> {
 	public void setKey(K key) {
 		this.key = key;
 	}
+	public int getHeight() {
+		return heigth;
+		
+	}
+	public void setHeight(int h) {
+		
+        heigth = h;
+	}
 
+	public int getBalancef() {
+		return balancef;
+	}
+
+	public void setBalancef(int balancef) {
+		this.balancef = balancef;
+	}
+	
 }
