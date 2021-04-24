@@ -9,6 +9,10 @@ public class QuickBasketManager {
 
 
 	private GenericBinarySearchTree<Double,Player> firstxd;
+	private GenericAVLTree<Double,Player> firstAVL;
+	private GenericAVLTree<Double,Player> secondAVL;
+	private GenericAVLTree<Double,Player> thirdAVL;
+	private GenericAVLTree<Double,Player> fourthAVL;
 	private final static String SEPARATOR = ",";
 	public final static String SAVE_PATH_FILE = "data/FBAdata.csv";
 
@@ -16,6 +20,10 @@ public class QuickBasketManager {
 
 	public QuickBasketManager() {
 		firstxd = new GenericBinarySearchTree<>();
+		firstAVL = new GenericAVLTree<>();
+		secondAVL  = new GenericAVLTree<>();
+		thirdAVL = new GenericAVLTree<>();
+		fourthAVL = new GenericAVLTree<>();
 	}
 
 
@@ -36,6 +44,10 @@ public class QuickBasketManager {
 			double generalEvaluation = Double.parseDouble(parts[8]);
 			Player toAdd = new Player(fullName, age, team, pointsPerGame, reboundsPerGame, assistsPerGame, robberiesPerGame, blocksPerGame, generalEvaluation);
 			firstxd.put(pointsPerGame, toAdd);
+			firstAVL.insert(reboundsPerGame, toAdd);
+			secondAVL.insert(assistsPerGame, toAdd);
+			thirdAVL.insert(robberiesPerGame, toAdd);
+			fourthAVL.insert(blocksPerGame, toAdd);
 			line = br.readLine();
 		}
 		br.close();

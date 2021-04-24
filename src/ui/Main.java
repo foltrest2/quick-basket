@@ -19,11 +19,15 @@ public class Main {
 	public static void main(String[] args) {
 		Main.start();
 		try {
+			double start = System.nanoTime();    
 			qbm.importData();
+			double elapsedTime = System.nanoTime() - start;
+			double elapsedTimeFinal = elapsedTime /1000000000;
+			System.out.println(elapsedTimeFinal);
 		} catch (IOException e) {	
 			e.printStackTrace();
 		}
-		System.out.println(qbm.checkImport());
+		//		System.out.println(qbm.checkImport());
 	}
 
 }
