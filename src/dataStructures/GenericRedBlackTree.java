@@ -202,7 +202,6 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 							z = z.father;
 							leftRotate(z);
 							z = z.father.father;
-							rightRotateFixup(z);
 							rightRotate(z);
 						}
 
@@ -234,7 +233,6 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 							z = z.father;
 							rightRotate(z);
 							z = z.father.father;
-							leftRotateFixup(z);
 							leftRotate(z);
 						}
 						// Case 3: if y  is black and z is a right child
@@ -289,7 +287,7 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 	// @return: returns a node with the key, key, if not found, returns null
 	// Searches for a node with key k and returns the first such node, if no
 	// such node is found returns null
-	public ArrayList<V> search(K key){
+	public List<V> search(K key){
 		Node<K,V> current = root;
 		while (!isnull(current)){
 			if (current.key.equals(key))
@@ -301,7 +299,7 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Returns sorted list of keys greater than key.  Size of list
 	 * will not exceed maxReturned
@@ -309,21 +307,39 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 	 * @param maxReturned Maximum number of results to return
 	 * @return List of keys greater than key.  List may not exceed maxReturned
 	 */
-	public List<K> getGreaterThan(K key, Integer maxReturned) {
-		List<K> list = new ArrayList<>();
+	public List<V> getGreaterThan(K key, Integer maxReturned) {
+		List<V> list = new ArrayList<>();
 		getGreaterThan(root, key, list);
 		return list.subList(0, Math.min(maxReturned, list.size()));
 	}
 
-	private void getGreaterThan(Node<K,V> node, K key, List<K> list) {
+	private void getGreaterThan(Node<K,V> node, K key, List<V> list) {
 		if (isnull(node)) {
 			return;
 		} else if (node.key.compareTo(key) > 0) {
 			getGreaterThan(node.left, key, list);
-			list.add(node.key);
+			list.addAll(node.values);
 			getGreaterThan(node.right, key, list);
 		} else {
 			getGreaterThan(node.right, key, list);
+		}
+	}
+	
+	public List<V> getLowestThan(K key, Integer maxReturned) {
+		List<V> list = new ArrayList<>();
+		getLowestThan(root, key, list);
+		return list.subList(0, Math.min(maxReturned, list.size()));
+	}
+
+	private void getLowestThan(Node<K,V> node, K key, List<V> list) {
+		if (isnull(node)) {
+			return;
+		} else if (node.key.compareTo(key) < 0) {
+			getLowestThan(node.right, key, list);
+			list.addAll(node.values);
+			getLowestThan(node.left, key, list);
+		} else {
+			getLowestThan(node.left, key, list);
 		}
 	}
 

@@ -1,6 +1,7 @@
 package dataStructures;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GenericAVLTree<K extends Comparable<K>,V> {
 
@@ -28,7 +29,7 @@ public class GenericAVLTree<K extends Comparable<K>,V> {
 		return size() == 0;
 	}
 
-	public ArrayList<V> search(K key) {	
+	public List<V> search(K key) {	
 		if(root != null) {
 			Node<K,V> toLookAt = searchRecursive(key,root);
 			return toLookAt.getValues();
@@ -37,6 +38,7 @@ public class GenericAVLTree<K extends Comparable<K>,V> {
 			return null;
 		}	
 	}
+	
 	private Node<K,V> searchRecursive(K key, Node<K,V> currentNode){	
 		if(key.compareTo(currentNode.getKey()) == 0) {
 			return currentNode;
@@ -52,6 +54,7 @@ public class GenericAVLTree<K extends Comparable<K>,V> {
 	public void insert(K key, V value) {
 			root = insert(root, key, value);
 	}
+	
 	private Node<K,V> insert(Node<K,V> node, K key, V value) {
 		if (node == null) {
 			return new Node<K,V>(key, value);	
@@ -69,12 +72,14 @@ public class GenericAVLTree<K extends Comparable<K>,V> {
 		update(node);
 		return balance(node);
 	}
+	
 	private void update(Node<K,V> node) {
 		int leftNodeHeight = (node.getLeft() == null) ? -1 : node.getLeft().getHeight();
 		int rightNodeHeight = (node.getRight() == null) ? -1 : node.getRight().getHeight();
 		node.setHeight(1 + Math.max(leftNodeHeight, rightNodeHeight));
 		node.setBalancef( rightNodeHeight - leftNodeHeight);
 	}
+	
 	private Node<K,V> balance(Node<K,V> node) {
 		if (node.getBalancef() == -2) {
 			if (node.getLeft().getBalancef() <= 0) {
@@ -130,6 +135,53 @@ public class GenericAVLTree<K extends Comparable<K>,V> {
 		update(node);
 		update(newParent);
 		return newParent;
+	}
+	
+	/**
+	 * Returns sorted list of keys greater than key.  Size of list
+	 * will not exceed maxReturned
+	 * @param key Key to search for
+	 * @param maxReturned Maximum number of results to return
+	 * @return List of keys greater than key.  List may not exceed maxReturned
+	 */
+	public List<V> getGreaterThan(K key, Integer maxReturned) {
+		List<V> list = new ArrayList<>();
+		getGreaterThan(root, key, list);
+		return list.subList(0, Math.min(maxReturned, list.size()));
+	}
+
+	private void getGreaterThan(Node<K,V> node, K key, List<V> list) {
+		if (isnull(node)) {
+			return;
+		} else if (node.key.compareTo(key) > 0) {
+			getGreaterThan(node.left, key, list);
+			list.addAll(node.values);
+			getGreaterThan(node.right, key, list);
+		} else {
+			getGreaterThan(node.right, key, list);
+		}
+	}
+	
+	public List<V> getLowestThan(K key, Integer maxReturned) {
+		List<V> list = new ArrayList<>();
+		getLowestThan(root, key, list);
+		return list.subList(0, Math.min(maxReturned, list.size()));
+	}
+
+	private void getLowestThan(Node<K,V> node, K key, List<V> list) {
+		if (isnull(node)) {
+			return;
+		} else if (node.key.compareTo(key) < 0) {
+			getLowestThan(node.right, key, list);
+			list.addAll(node.values);
+			getLowestThan(node.left, key, list);
+		} else {
+			getLowestThan(node.left, key, list);
+		}
+	}
+	
+	private boolean isnull(Node<K,V> node){
+		return node == null;		
 	}
 	
     public String preOrder() {

@@ -4,88 +4,172 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import dataStructures.*;
 
 public class QuickBasketManager {
 
-	private GenericBinarySearchTree<Double,Player> firstxd;
-	private GenericAVLTree<Double,Player> firstAVL;
-	private GenericAVLTree<Double,Player> secondAVL;
-	private GenericAVLTree<Double,Player> thirdAVL;
-	private GenericAVLTree<Double,Player> fourthAVL;
-	private GenericRedBlackTree<Double,Player> firstRedBlack;
-	private ArrayList<Player> playersList;
+	private GenericBinarySearchTree<Double,Player> BSTPointsPerGame;
+	private GenericAVLTree<Double,Player> AVLReboundsPerGame;
+	private GenericAVLTree<Double,Player> AVLAssistPerGame;
+	private GenericAVLTree<Double,Player> AVLRobberiesPerGame;
+	private GenericAVLTree<Double,Player> AVLBlocksPerGame;
+	private GenericRedBlackTree<Double,Player> RedBlackGeneralEvaluation;
+	private List<Player> playersList;
 	private final static String SEPARATOR = ",";
 	public final static String SAVE_PATH_FILE = "data/FBAdata.csv";
 
 	public QuickBasketManager() {
-		firstxd = new GenericBinarySearchTree<>();
-		firstAVL = new GenericAVLTree<>();
-		secondAVL  = new GenericAVLTree<>();
-		thirdAVL = new GenericAVLTree<>();
-		fourthAVL = new GenericAVLTree<>();
+		BSTPointsPerGame = new GenericBinarySearchTree<>();
+		AVLReboundsPerGame = new GenericAVLTree<>();
+		AVLAssistPerGame  = new GenericAVLTree<>();
+		AVLRobberiesPerGame = new GenericAVLTree<>();
+		AVLBlocksPerGame = new GenericAVLTree<>();
 		playersList = new ArrayList<>();
-		firstRedBlack = new GenericRedBlackTree<>();
+		RedBlackGeneralEvaluation = new GenericRedBlackTree<>();
 	}
 
-
-	public ArrayList<Player> searchUniqueParameter(int option, double key, int searchGreaterThan){
-		ArrayList<Player> found = new ArrayList<>();
+	public List<Player> searchUniqueParameter(int option, double key, int searchGreaterThan){
+		List<Player> found = new ArrayList<>();
 		switch (option) {
 		case 1:
-			//Search by pointsPerGame
-			found = firstxd.search(key);
+			//Seaarch by pointsPerGame BST tree
+			switch (searchGreaterThan) {
+			case 0:
+				found = BSTPointsPerGame.getLowestThan(key, playersList.size());
+				break;
+			case 1:
+				found = BSTPointsPerGame.getGreaterThan(key, playersList.size());
+				break;
+			case 2:
+				found = BSTPointsPerGame.search(key);
+				break;
+			default:
+				found = null;
+				break;
+			}
 			break;
 
 		case 2:
-			//Search by reboundsPerGame
-			found = firstAVL.search(key);
-			break;
+			//Search by ReboundsPerGame AVL tree
+			switch (searchGreaterThan) {
+			case 0:
+				found = AVLReboundsPerGame.getLowestThan(key, playersList.size());
+				break;
+			case 1:
+				found = AVLReboundsPerGame.getGreaterThan(key, playersList.size());
+				break;
+			case 2:
+				found = AVLReboundsPerGame.search(key);
+				break;
+			default:
+				found = null;
+				break;
+			}
 
+			break;
 		case 3:
+			//Search by AssistPerGame AVL tree
+			switch (searchGreaterThan) {
+			case 0:
+				found = AVLAssistPerGame.getLowestThan(key, playersList.size());
+				break;
+			case 1:
+				found = AVLAssistPerGame.getGreaterThan(key, playersList.size());
+				break;
+			case 2:
+				found = AVLAssistPerGame.search(key);
+				break;
+			default:
+				found = null;
+				break;
+			}
 
 			break;
 		case 4:
+			//Search by RobberiesPerGame AVL tree
+			switch (searchGreaterThan) {
+			case 0:
+				found = AVLRobberiesPerGame.getLowestThan(key, playersList.size());
+				break;
+			case 1:
+				found = AVLRobberiesPerGame.getGreaterThan(key, playersList.size());
+				break;
+			case 2:
+				found = AVLRobberiesPerGame.search(key);
+				break;
+			default:
+				found = null;
+				break;
+			}
 
 			break;
 		case 5:
-			found = firstRedBlack.search(key);
-			break;
-		case 6:
+			//Search by BlocksPerGame AVL tree
 			switch (searchGreaterThan) {
 			case 0:
-				//Search by generalEvaluation player list lineal
-				for (int i = 0; i < playersList.size(); i++) {
-					if(playersList.get(i).getAge() <= key) {
-						found.add(playersList.get(i));
-					}
-				}
-				
+				found = AVLBlocksPerGame.getLowestThan(key, playersList.size());
 				break;
 			case 1:
-				//Search by generalEvaluation player list lineal
+				found = AVLBlocksPerGame.getGreaterThan(key, playersList.size());
+				break;
+			case 2:
+				found = AVLBlocksPerGame.search(key);
+				break;
+			default:
+				found = null;
+				break;
+			}
+
+			break;
+
+		case 6:
+			//Search by generalEvaluation blackRed Tree
+			switch (searchGreaterThan) {
+			case 0:				
+				found = RedBlackGeneralEvaluation.getLowestThan(key, playersList.size());
+				break;
+			case 1:
+				found = RedBlackGeneralEvaluation.getGreaterThan(key, playersList.size());
+				break;
+			case 2:
+				found = RedBlackGeneralEvaluation.search(key);
+				break;
+			default:
+				found = null;
+			}
+
+		case 7:
+			//Search by player age on lineal list
+			switch (searchGreaterThan) {
+			case 0:
 				for (int i = 0; i < playersList.size(); i++) {
-					if(playersList.get(i).getAge() >= key) {
+					if(playersList.get(i).getAge() < key) {
 						found.add(playersList.get(i));
 					}
 				}
-	
+				break;
+			case 1:
+				for (int i = 0; i < playersList.size(); i++) {
+					if(playersList.get(i).getAge() > key) {
+						found.add(playersList.get(i));
+					}
+				}
 				break;
 			case 2:
-				//Search by generalEvaluation player list lineal
 				for (int i = 0; i < playersList.size(); i++) {
 					if(playersList.get(i).getAge() == key) {
 						found.add(playersList.get(i));
 					}
 				}
-				
 				break;
 			default:
-				break;
-			}
+				found = null;
+			}	
 			break;
 		default:
+			found = null;
 			break;
 		}
 		return found;
@@ -107,12 +191,12 @@ public class QuickBasketManager {
 			double blocksPerGame = Double.parseDouble(parts[7]);
 			double generalEvaluation = Double.parseDouble(parts[8]);
 			Player toAdd = new Player(fullName, age, team, pointsPerGame, reboundsPerGame, assistsPerGame, robberiesPerGame, blocksPerGame, generalEvaluation);
-			firstxd.put(pointsPerGame, toAdd);
-			firstAVL.insert(reboundsPerGame, toAdd);
-			secondAVL.insert(assistsPerGame, toAdd);
-			thirdAVL.insert(robberiesPerGame, toAdd);
-			fourthAVL.insert(blocksPerGame, toAdd);
-			firstRedBlack.insert(generalEvaluation, toAdd);
+			BSTPointsPerGame.put(pointsPerGame, toAdd);
+			AVLReboundsPerGame.insert(reboundsPerGame, toAdd);
+			AVLAssistPerGame.insert(assistsPerGame, toAdd);
+			AVLRobberiesPerGame.insert(robberiesPerGame, toAdd);
+			AVLBlocksPerGame.insert(blocksPerGame, toAdd);
+			RedBlackGeneralEvaluation.insert(generalEvaluation, toAdd);
 			playersList.add(toAdd);
 			line = br.readLine();
 		}
@@ -120,9 +204,9 @@ public class QuickBasketManager {
 	}
 
 	public String checkImport() {
-//		return firstxd.preOrder();
-//		return firstAVL.preOrder();
-		return firstRedBlack.preOrder();
-		
+//				return BSTPointsPerGame.preOrder();
+//				return AVLReboundsPerGame.preOrder();
+		return RedBlackGeneralEvaluation.preOrder();
+
 	}
 }
