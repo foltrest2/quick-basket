@@ -1,6 +1,7 @@
 package dataStructures;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GenericBinarySearchTree<K extends Comparable<K>,V> {
 
@@ -29,7 +30,7 @@ public class GenericBinarySearchTree<K extends Comparable<K>,V> {
 		return x;
 	}
 	
-	public ArrayList<V> search(K key) {	
+	public List<V> search(K key) {	
 		if(root != null) {
 			Node<K,V> toLookAt = searchRecursive(key,root);
 			return toLookAt.getValues();
@@ -77,6 +78,53 @@ public class GenericBinarySearchTree<K extends Comparable<K>,V> {
         return max;
     }
     
+	/**
+	 * Returns sorted list of keys greater than key.  Size of list
+	 * will not exceed maxReturned
+	 * @param key Key to search for
+	 * @param maxReturned Maximum number of results to return
+	 * @return List of keys greater than key.  List may not exceed maxReturned
+	 */
+	public List<V> getGreaterThan(K key, Integer maxReturned) {
+		List<V> list = new ArrayList<>();
+		getGreaterThan(root, key, list);
+		return list.subList(0, Math.min(maxReturned, list.size()));
+	}
+
+	private void getGreaterThan(Node<K,V> node, K key, List<V> list) {
+		if (isnull(node)) {
+			return;
+		} else if (node.key.compareTo(key) > 0) {
+			getGreaterThan(node.left, key, list);
+			list.addAll(node.values);
+			getGreaterThan(node.right, key, list);
+		} else {
+			getGreaterThan(node.right, key, list);
+		}
+	}
+	
+	public List<V> getLowestThan(K key, Integer maxReturned) {
+		List<V> list = new ArrayList<>();
+		getLowestThan(root, key, list);
+		return list.subList(0, Math.min(maxReturned, list.size()));
+	}
+
+	private void getLowestThan(Node<K,V> node, K key, List<V> list) {
+		if (isnull(node)) {
+			return;
+		} else if (node.key.compareTo(key) < 0) {
+			getLowestThan(node.right, key, list);
+			list.addAll(node.values);
+			getLowestThan(node.left, key, list);
+		} else {
+			getLowestThan(node.left, key, list);
+		}
+	}
+	
+	private boolean isnull(Node<K,V> node){
+		return node == null;		
+	}
+	
     public String preOrder() {
         return preOrderRecursive(this.root).trim();
     }
@@ -86,7 +134,7 @@ public class GenericBinarySearchTree<K extends Comparable<K>,V> {
     		return "";
     	}
     	String s = "";
-    	s += " " + root.getValues().toString()+"\n";
+    	s += " " + root.getValues().toString();
     	s += preOrderRecursive(root.getLeft());
     	s += preOrderRecursive(root.getRight());
     	return s;	

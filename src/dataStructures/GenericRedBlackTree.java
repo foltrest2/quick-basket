@@ -193,7 +193,11 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 							// leftRotaet around z's father
 							z = z.getFather();
 							leftRotate(z);
+<<<<<<< HEAD
 							z = z.getFather().getFather();
+=======
+							z = z.father.father;
+>>>>>>> b7c5767fbcdc02eebb0f16602dc26413a68c883a
 							rightRotate(z);
 						}
 
@@ -224,7 +228,11 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 							// rightRotate around z's father
 							z = z.getFather();
 							rightRotate(z);
+<<<<<<< HEAD
 							z = z.getFather().getFather();
+=======
+							z = z.father.father;
+>>>>>>> b7c5767fbcdc02eebb0f16602dc26413a68c883a
 							leftRotate(z);
 						}
 						// Case 3: if y  is black and z is a right child
@@ -279,7 +287,7 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 	// @return: returns a node with the key, key, if not found, returns null
 	// Searches for a node with key k and returns the first such node, if no
 	// such node is found returns null
-	public ArrayList<V> search(K key){
+	public List<V> search(K key){
 		Node<K,V> current = root;
 		while (!isnull(current)){
 			if (current.getKey().equals(key))
@@ -291,7 +299,7 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 		}
 		return null;
 	}
-
+	
 	/**
 	 * Returns sorted list of keys greater than key.  Size of list
 	 * will not exceed maxReturned
@@ -299,21 +307,46 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 	 * @param maxReturned Maximum number of results to return
 	 * @return List of keys greater than key.  List may not exceed maxReturned
 	 */
-	public List<K> getGreaterThan(K key, Integer maxReturned) {
-		List<K> list = new ArrayList<>();
+	public List<V> getGreaterThan(K key, Integer maxReturned) {
+		List<V> list = new ArrayList<>();
 		getGreaterThan(root, key, list);
 		return list.subList(0, Math.min(maxReturned, list.size()));
 	}
 
-	private void getGreaterThan(Node<K,V> node, K key, List<K> list) {
+	private void getGreaterThan(Node<K,V> node, K key, List<V> list) {
 		if (isnull(node)) {
 			return;
+<<<<<<< HEAD
 		} else if (node.getKey().compareTo(key) > 0) {
 			getGreaterThan(node.getLeft(), key, list);
 			list.add(node.getKey());
 			getGreaterThan(node.getRight(), key, list);
+=======
+		} else if (node.key.compareTo(key) > 0) {
+			getGreaterThan(node.left, key, list);
+			list.addAll(node.values);
+			getGreaterThan(node.right, key, list);
+>>>>>>> b7c5767fbcdc02eebb0f16602dc26413a68c883a
 		} else {
 			getGreaterThan(node.getRight(), key, list);
+		}
+	}
+	
+	public List<V> getLowestThan(K key, Integer maxReturned) {
+		List<V> list = new ArrayList<>();
+		getLowestThan(root, key, list);
+		return list.subList(0, Math.min(maxReturned, list.size()));
+	}
+
+	private void getLowestThan(Node<K,V> node, K key, List<V> list) {
+		if (isnull(node)) {
+			return;
+		} else if (node.key.compareTo(key) < 0) {
+			getLowestThan(node.right, key, list);
+			list.addAll(node.values);
+			getLowestThan(node.left, key, list);
+		} else {
+			getLowestThan(node.left, key, list);
 		}
 	}
 
@@ -333,4 +366,18 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
 		return root.getNumLeft() + root.getNumRight() + 1;
 	}
 
+    public String preOrder() {
+        return preOrderRecursive(this.root).trim();
+    }
+    
+    private String preOrderRecursive(Node<K, V> root) {
+    	if (root == null) {
+    		return "";
+    	}
+    	String s = "";
+    	s += " " + root.getValues().toString();
+    	s += preOrderRecursive(root.getLeft());
+    	s += preOrderRecursive(root.getRight());
+    	return s;	
+    }
 }
