@@ -1,11 +1,10 @@
 package dataStructures;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Node<K extends Comparable<K>,V> {
 
-
-	
     public static final int BLACK = 0;
     public static final int RED = 1;
 	Node<K,V> father;
@@ -17,7 +16,7 @@ public class Node<K extends Comparable<K>,V> {
     public int color;
     private int heigth;
 	private int balancef;
-	ArrayList<V> values;
+	List<V> values;
 
 
 	public Node(K key, V value) {
@@ -32,7 +31,7 @@ public class Node<K extends Comparable<K>,V> {
 		values.add(newValue);
 	}
 	
-	public ArrayList<V> getValues() {
+	public List<V> getValues() {
 		return values;
 	}
 	
@@ -40,7 +39,7 @@ public class Node<K extends Comparable<K>,V> {
 		return father;
 	}
 	
-	public void setValues(ArrayList<V> values) {
+	public void setValues(List<V> values) {
 		this.values = values;
 	}
 
