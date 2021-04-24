@@ -27,11 +27,8 @@ public class Main {
 		} catch (IOException e) {	
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
+
 //		System.out.println(qbm.searchUniqueParameter(1,1));
-=======
-		
->>>>>>> 6216e170d107b2bdd847ec2ae16afe7d92ddfe33
 		//		System.out.println(qbm.checkImport());
 		System.out.println(qbm.searchUniqueParameter(2,500,0));
 //		System.out.println(qbm.searchUniqueParameter(6,1));
