@@ -4,14 +4,22 @@ import java.util.ArrayList;
 
 public class Node<K extends Comparable<K>,V> {
 
-	private Node<K,V> father;
-	private Node<K,V> left;
-	private Node<K,V> right;
-	private K key;
-	private ArrayList<V> values;
+    public static final int BLACK = 0;
+    public static final int RED = 1;
+	
+	Node<K,V> father;
+	Node<K,V> left;
+	Node<K,V> right;
+	K key;
+    public int numLeft;
+    public int numRight;
+    public int color;
+	ArrayList<V> values;
 
 	public Node(K key, V value) {
 		this.key = key;
+		numLeft = 0;
+		numRight = 0;
 		values = new ArrayList<V>();
 		values.add(value);
 	}

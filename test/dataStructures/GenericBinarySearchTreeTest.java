@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class GenericBinaryTreeTest {
+class GenericBinarySearchTreeTest {
 
     GenericBinarySearchTree<String, Integer> testTree;
 
@@ -39,10 +39,10 @@ class GenericBinaryTreeTest {
     @Test
     public void InsertTest2() {
         setupScenary2();
-        assertEquals(new Integer(1), testTree.search("A").get(0), "Test failed");
-        assertEquals(new Integer(2), testTree.search("B").get(0), "Test failed");
-        assertEquals(new Integer(5), testTree.search("B").get(1), "Test failed");
-        assertEquals(new Integer(6), testTree.search("B").get(2), "Test failed");
+        assertEquals(new Integer(2), testTree.search("A").get(0), "Test failed");
+        assertEquals(new Integer(1), testTree.search("C").get(0), "Test failed");
+        assertEquals(new Integer(4), testTree.search("D").get(0), "Test failed");
+        assertEquals(new Integer(6), testTree.search("E").get(1), "Test failed");
     }
 
 }
