@@ -373,4 +373,8 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> {
     	s += preOrderRecursive(root.getRight());
     	return s;	
     }
+    
+    public void reset() {
+    	root = null;
+    }
 }
