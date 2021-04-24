@@ -101,6 +101,6 @@ public class Player {
 		return "Player [fullName=" + fullName + ", age=" + age + ", team=" + team + ", pointsPerGame=" + pointsPerGame
 				+ ", reboundsPerGame=" + reboundsPerGame + ", assistsPerGame=" + assistsPerGame + ", robberiesPerGame="
 				+ robberiesPerGame + ", blocksPerGame=" + blocksPerGame + ", generalEvaluation=" + generalEvaluation
-				+ "]";
+				+ "]"+"\n";
 	}
 }
