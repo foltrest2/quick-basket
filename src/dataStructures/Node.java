@@ -17,7 +17,7 @@ public class Node<K extends Comparable<K>,V> {
 	private int color;
     private int heigth;
 	private int balancef;
-	List<V> values;
+	private List<V> values;
 
 
 	public Node(K key, V value) {

@@ -3,7 +3,7 @@ package dataStructures;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenericBinarySearchTree<K extends Comparable<K>,V> {
+public class GenericBinarySearchTree<K extends Comparable<K>,V> implements GenericBinarySearchTreeInterface<K, V>{
 
 	private Node<K,V> root;
 
@@ -94,12 +94,12 @@ public class GenericBinarySearchTree<K extends Comparable<K>,V> {
 	private void getGreaterThan(Node<K,V> node, K key, List<V> list) {
 		if (isnull(node)) {
 			return;
-		} else if (node.key.compareTo(key) > 0) {
-			getGreaterThan(node.left, key, list);
-			list.addAll(node.values);
-			getGreaterThan(node.right, key, list);
+		} else if (node.getKey().compareTo(key) > 0) {
+			getGreaterThan(node.getLeft(), key, list);
+			list.addAll(node.getValues());
+			getGreaterThan(node.getRight(), key, list);
 		} else {
-			getGreaterThan(node.right, key, list);
+			getGreaterThan(node.getRight(), key, list);
 		}
 	}
 	
@@ -112,12 +112,12 @@ public class GenericBinarySearchTree<K extends Comparable<K>,V> {
 	private void getLowestThan(Node<K,V> node, K key, List<V> list) {
 		if (isnull(node)) {
 			return;
-		} else if (node.key.compareTo(key) < 0) {
-			getLowestThan(node.right, key, list);
-			list.addAll(node.values);
-			getLowestThan(node.left, key, list);
+		} else if (node.getKey().compareTo(key) < 0) {
+			getLowestThan(node.getRight(), key, list);
+			list.addAll(node.getValues());
+			getLowestThan(node.getLeft(), key, list);
 		} else {
-			getLowestThan(node.left, key, list);
+			getLowestThan(node.getLeft(), key, list);
 		}
 	}
 	
