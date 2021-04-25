@@ -3,22 +3,21 @@ package ui;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import model.Player;
 import model.QuickBasketManager;
@@ -31,8 +30,6 @@ public class QuickBasketGUI {
 	@FXML
 	private ComboBox<String> consultOptions;
 	@FXML
-	private ChoiceBox<?> otherOperationsOp;
-	@FXML
 	private TextField consulttypetxt;
 	@FXML
 	private Label consulttypelabel;
@@ -42,6 +39,8 @@ public class QuickBasketGUI {
 	private ComboBox<String> consulttype;
 	@FXML
 	private Button showResultbtn;
+	@FXML
+	private ComboBox<String> otherOperationsOp;
 	@FXML
 	private Label labelopearation;
 	@FXML
@@ -115,9 +114,6 @@ public class QuickBasketGUI {
 	@FXML
 	private TableColumn<Player, Double> generalEC;
 
-	private List<Player> returned;
-
-
 	public QuickBasketGUI(QuickBasketManager q) {
 		qbm = q;
 
@@ -128,10 +124,10 @@ public class QuickBasketGUI {
 		fxmlLoader.setController(this);
 		Parent mainMenu = fxmlLoader.load();
 		basePane.setCenter(mainMenu);
-		qbm.importData();
 		setNotVisible();
 		initializechoiceboxconsulttype();
 		initializechoiboxconsultoptions();
+		initializechoiceboxotheroperationstype();
 
 	}
 
@@ -148,6 +144,7 @@ public class QuickBasketGUI {
 		assistspergametxt.setVisible(false);
 		robberiespergametxt.setVisible(false);
 		reboundspergametxt.setVisible(false);
+		idToAddTxt.setVisible(false);
 		fullNametxt.setVisible(false);
 		AgeTxt.setVisible(false);
 		blockspergametxt.setVisible(false);
@@ -207,12 +204,11 @@ public class QuickBasketGUI {
 
 	}
 
-	public void consultOperation() {
+	public List<Player> consultOperation() {
 
 		double k = Double.parseDouble(referencenumbertxt.getText());
-		System.out.println(consultOptions.getSelectionModel().getSelectedIndex() + " "+consulttype.getSelectionModel().getSelectedIndex() );
-		returned = qbm.searchUniqueParameter(consultOptions.getSelectionModel().getSelectedIndex(),k, consulttype.getSelectionModel().getSelectedIndex());
-
+		List<Player> returned = qbm.searchUniqueParameter(consultOptions.getSelectionModel().getSelectedIndex(),k, consulttype.getSelectionModel().getSelectedIndex());
+		return returned;
 
 	}
 
@@ -261,7 +257,7 @@ public class QuickBasketGUI {
 	public void initializeplayersTable() {
 
 		ObservableList <Player> oblist;
-		oblist = FXCollections.observableList(returned);
+		oblist = FXCollections.observableList(consultOperation());
 		playersTable.setItems(oblist);
 		idC.setCellValueFactory(new PropertyValueFactory<Player,Integer>("id"));
 		fullnameC.setCellValueFactory(new PropertyValueFactory<Player,String>("fullName"));
@@ -288,30 +284,193 @@ public class QuickBasketGUI {
 
 	}
 
+	public void initializechoiceboxotheroperationstype() {	
+		ArrayList<String> op = new ArrayList<>();
+		op.add("Add player option");
+		op.add("Delete player option");
+		ObservableList<String> options = FXCollections.observableList(op);
+		otherOperationsOp.setItems(options);	
+
+	}	
+	@FXML
+	void checkOtherOp(ActionEvent event) {
+
+		showOtherOperationsMenu();
+
+	}
+
+	public void showOtherOperationsMenu() {
+
+		if(otherOperationsOp.getSelectionModel().getSelectedIndex() == 0) {
+
+			idToAddTxt.setVisible(true);
+			pointspergametxt.setVisible(true);
+			assistspergametxt.setVisible(true);
+			robberiespergametxt.setVisible(true);
+			reboundspergametxt.setVisible(true);
+			fullNametxt.setVisible(true);
+			AgeTxt.setVisible(true);
+			blockspergametxt.setVisible(true);
+			teamtxt.setVisible(true);
+			generalevaluationtxt.setVisible(true);
+			fullnamelabel.setVisible(true);
+			agelabel.setVisible(true);
+			teamlabel.setVisible(true);
+			pointspergamelabel.setVisible(true);
+			assistspergamelabel.setVisible(true);
+			reboundspergamelabel.setVisible(true);
+			robberiesPergamelabel.setVisible(true);
+			blockspergamelabel.setVisible(true);
+			generalevaluationlabel.setVisible(true);
+			idtoaddlabel.setVisible(true);
+			addBtn.setVisible(true);
+			deleteBtn.setVisible(false);
+			idToDeleteTxt.setVisible(false);
+			idToDelete.setVisible(false);
+		}else if(otherOperationsOp.getSelectionModel().getSelectedIndex() == 1) {
+
+			deleteBtn.setVisible(true);
+			idToDeleteTxt.setVisible(true);
+			idToDelete.setVisible(true);
+			idToAddTxt.setVisible(false);
+			pointspergametxt.setVisible(false);
+			assistspergametxt.setVisible(false);
+			robberiespergametxt.setVisible(false);
+			reboundspergametxt.setVisible(false);
+			fullNametxt.setVisible(false);
+			AgeTxt.setVisible(false);
+			blockspergametxt.setVisible(false);
+			teamtxt.setVisible(false);
+			generalevaluationtxt.setVisible(false);
+			fullnamelabel.setVisible(false);
+			agelabel.setVisible(false);
+			teamlabel.setVisible(false);
+			pointspergamelabel.setVisible(false);
+			assistspergamelabel.setVisible(false);
+			reboundspergamelabel.setVisible(false);
+			robberiesPergamelabel.setVisible(false);
+			blockspergamelabel.setVisible(false);
+			generalevaluationlabel.setVisible(false);
+			idtoaddlabel.setVisible(false);
+			addBtn.setVisible(false);
+
+		}
+
+	}
+
 	@FXML
 	void addPlayer(ActionEvent event) {
 
+		int id = Integer.parseInt(idToAddTxt.getText());
+		Double pointspg = Double.parseDouble(pointspergametxt.getText());
+		Double assistspg = Double.parseDouble(assistspergametxt.getText());
+		Double robberiespg =  Double.parseDouble(robberiespergametxt.getText());
+		Double reboundspg = Double.parseDouble(reboundspergametxt.getText());
+		Double blockspg = Double.parseDouble(blockspergametxt.getText());
+		String fullname = fullNametxt.getText();
+		int age = Integer.parseInt(AgeTxt.getText());
+		String pteam = teamtxt.getText();
+		Double generalevaluation = Double.parseDouble(generalevaluationtxt.getText());
+		String info = "";
+
+		try {
+			info = qbm.addNewPlayer(id, fullname, age, pteam, pointspg, reboundspg, assistspg, robberiespg, blockspg, generalevaluation);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+		if(info.equalsIgnoreCase("Player already exist!")) {
+
+			showAlertWhenIdAlreadyExists();
+		}else {
+			
+			showAlertWhenPlayerIsAdded();
+		}
+
+		clearTextAdd();	
 	}
 
 	@FXML
-	void returnP(ActionEvent event) {
+	void returnP(ActionEvent event) throws IOException {
 
-	}
-
-	@FXML
-	void toChooseConsultType(MouseEvent event) {
-
-	}
-
-	@FXML
-	void toChooseOperationType(MouseEvent event) {
+		loadMainMenu();
 
 	}
 
 	@FXML
 	void toDeletePlayer(ActionEvent event) {
 
+		int idToD = Integer.parseInt(idToDelete.getText());
+		String q = "";
+
+		try {
+			q = qbm.deletePlayer(idToD);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+		if(q.equalsIgnoreCase("Player does not exist!")) {
+
+			showAlertWhenPlayerDoesntExist();
+		}else {
+			
+			showAlertWhenPlayerIsDeleted();
+		}
+
+		clearTextDelete();
 	}
 
+	public void showAlertWhenIdAlreadyExists() {
 
+		Alert alert= new Alert(AlertType.ERROR);
+		alert.setHeaderText("INVALID ID ERROR");
+		alert.setContentText("That id is already used by another player");
+		alert.showAndWait();
+
+	}
+
+	public void showAlertWhenPlayerDoesntExist() {
+
+		Alert alert= new Alert(AlertType.ERROR);
+		alert.setHeaderText("PLAYER DOESN´T EXIST ERROR");
+		alert.setContentText("The player you are trying to delete doesn´t exist in the database");
+		alert.showAndWait();			
+	}
+	public void showAlertWhenPlayerIsAdded() {
+
+		Alert alert= new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText("PLAYER ADDED");
+		alert.setContentText("Player was added succesfully");
+		alert.showAndWait();			
+	}
+	public void showAlertWhenPlayerIsDeleted() {
+
+		Alert alert= new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText("PLAYER DELETED");
+		alert.setContentText("Player was deleted succesfully");
+		alert.showAndWait();			
+	}
+
+	public void clearTextAdd() {
+
+		idToAddTxt.clear();
+		pointspergametxt.clear();
+		assistspergametxt.clear();
+		robberiespergametxt.clear();
+		reboundspergametxt.clear();
+		fullNametxt.clear();
+		AgeTxt.clear();
+		blockspergametxt.clear();
+		teamtxt.clear();
+		generalevaluationtxt.clear();
+
+	}
+
+	public void clearTextDelete() {
+
+		idToDelete.clear();
+
+	}
 }

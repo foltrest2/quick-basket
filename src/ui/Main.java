@@ -26,6 +26,7 @@ public class Main extends Application {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("basePane.fxml"));
 		fxmlLoader.setController(guiItem);
 		Parent root = fxmlLoader.load();
+		qb.importData();
 		guiItem.loadMainMenu();
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
