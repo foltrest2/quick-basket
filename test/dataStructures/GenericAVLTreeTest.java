@@ -3,100 +3,136 @@ package dataStructures;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 import org.junit.Test;
 
 public class GenericAVLTreeTest {
 
-	GenericAVLTree<String, Integer> tesstAVL;
+	GenericAVLTree<String, Integer> testTree;
 
 	public void setupScenary1() {
-		tesstAVL = new GenericAVLTree<String, Integer>("A",1);
-		tesstAVL.insert("B", 2);
-		tesstAVL.insert("C", 3);
+		testTree = new GenericAVLTree<String, Integer>("A",1);
+		testTree.insert("B", 2);
+		testTree.insert("C", 3);
 
 	}
 	public void setupScenary2() {
-		tesstAVL = new GenericAVLTree<String, Integer>("D",7);
-		tesstAVL.insert("C", 5);
-		tesstAVL.insert("A", 6);
+		testTree = new GenericAVLTree<String, Integer>("D",7);
+		testTree.insert("C", 5);
+		testTree.insert("A", 6);
 	}
-
 	public void setupScenary3() {
-		tesstAVL = new GenericAVLTree<String, Integer>("F", 10);
-		tesstAVL.insert("C", 9);
-		tesstAVL.insert("D", 13);
+		testTree = new GenericAVLTree<String, Integer>("F", 10);
+		testTree.insert("C", 9);
+		testTree.insert("D", 13);
 	}
-
 	public void setupScenary4() {
 
-		tesstAVL = new GenericAVLTree<String, Integer>("A", 6);
-		tesstAVL.insert("E", 12);
-		tesstAVL.insert("B", 2);	
+		testTree = new GenericAVLTree<String, Integer>("A", 6);
+		testTree.insert("E", 12);
+		testTree.insert("B", 2);	
 	}
 	public void setupScenary5() {
 
-		tesstAVL = new GenericAVLTree<String, Integer>("A", 6);
-		tesstAVL.insert("E", 12);
-		tesstAVL.insert("B", 2);
-		tesstAVL.insert("B", 3);	
-		tesstAVL.insert("B", 8);
-		tesstAVL.insert("E", 13);
-		tesstAVL.insert("E", 14);
-		tesstAVL.insert("E", 15);
-		tesstAVL.insert("E", 16);		
+		testTree = new GenericAVLTree<String, Integer>("A", 6);
+		testTree.insert("E", 12);
+		testTree.insert("B", 2);
+		testTree.insert("B", 3);	
+		testTree.insert("B", 8);
+		testTree.insert("E", 13);
+		testTree.insert("E", 14);
+		testTree.insert("E", 15);
+		testTree.insert("E", 16);		
 	}
-
+	
+	public void setupScenary6() {
+		testTree = new GenericAVLTree<String, Integer>();
+		testTree.insert("A", 1);
+		testTree.insert("A", 2);
+		testTree.insert("A", 3);
+		testTree.insert("B", 4);
+		testTree.insert("B", 5);
+		testTree.insert("B", 6);
+		testTree.insert("C", 7);
+		testTree.insert("C", 8);
+		testTree.insert("C", 9);
+	}
 	@Test
 	public void InsertTest() {
 		setupScenary1();
-		assertEquals(new Integer(1), tesstAVL.search("A").get(0), "Test failed");
-		assertEquals(new Integer(2), tesstAVL.getRoot().getValues().get(0), "Test failed");
-		assertEquals(new Integer(3), tesstAVL.getRoot().getRight().getValues().get(0), "Test failed");
-		assertEquals("A", tesstAVL.getRoot().getLeft().getKey(), "Test failed");		
+		assertEquals(new Integer(1), testTree.search("A").get(0), "Test failed");
+		assertEquals(new Integer(2), testTree.getRoot().getValues().get(0), "Test failed");
+		assertEquals(new Integer(3), testTree.getRoot().getRight().getValues().get(0), "Test failed");
+		assertEquals("A", testTree.getRoot().getLeft().getKey(), "Test failed");		
 	}
-
 	@Test
 	public void InsertTest2() {
 
 		setupScenary2();
-		assertEquals(new Integer(7), tesstAVL.search("D").get(0), "Test failed");
-		assertEquals(new Integer(5), tesstAVL.getRoot().getValues().get(0), "Test failed");
-		assertEquals(new Integer(7), tesstAVL.getRoot().getRight().getValues().get(0), "Test failed");
-		assertEquals("A", tesstAVL.getRoot().getLeft().getKey(), "Test failed");
+		assertEquals(new Integer(7), testTree.search("D").get(0), "Test failed");
+		assertEquals(new Integer(5), testTree.getRoot().getValues().get(0), "Test failed");
+		assertEquals(new Integer(7), testTree.getRoot().getRight().getValues().get(0), "Test failed");
+		assertEquals("A", testTree.getRoot().getLeft().getKey(), "Test failed");
 
 	}
 	@Test
 	public void InsertTest3() {
 
 		setupScenary3();
-		assertEquals(new Integer(13), tesstAVL.search("D").get(0), "Test failed");
-		assertEquals(new Integer(13), tesstAVL.getRoot().getValues().get(0), "Test failed");
-		assertEquals(new Integer(10), tesstAVL.getRoot().getRight().getValues().get(0), "Test failed");
-		assertEquals("C", tesstAVL.getRoot().getLeft().getKey(), "Test failed");
+		assertEquals(new Integer(13), testTree.search("D").get(0), "Test failed");
+		assertEquals(new Integer(13), testTree.getRoot().getValues().get(0), "Test failed");
+		assertEquals(new Integer(10), testTree.getRoot().getRight().getValues().get(0), "Test failed");
+		assertEquals("C", testTree.getRoot().getLeft().getKey(), "Test failed");
 
 	}
 	@Test
 	public void InsertTest4() {
 
 		setupScenary4();
-		assertEquals(new Integer(6), tesstAVL.search("A").get(0), "Test failed");
-		assertEquals(new Integer(2), tesstAVL.getRoot().getValues().get(0), "Test failed");
-		assertEquals(new Integer(12), tesstAVL.getRoot().getRight().getValues().get(0), "Test failed");
-		assertEquals("A", tesstAVL.getRoot().getLeft().getKey(), "Test failed");
+		assertEquals(new Integer(6), testTree.search("A").get(0), "Test failed");
+		assertEquals(new Integer(2), testTree.getRoot().getValues().get(0), "Test failed");
+		assertEquals(new Integer(12), testTree.getRoot().getRight().getValues().get(0), "Test failed");
+		assertEquals("A", testTree.getRoot().getLeft().getKey(), "Test failed");
 
 	}
-	
 	@Test
 	public void SearchTest() {
 
 		setupScenary5();
-		assertEquals(new Integer(2), tesstAVL.getRoot().getValues().get(0), "Test failed");
-		assertEquals(new Integer(3), tesstAVL.getRoot().getValues().get(1), "Test failed");
-		assertEquals(new Integer(8),tesstAVL.getRoot().getValues().get(2), "Test failed");
-		assertEquals(new Integer(12), tesstAVL.search("E").get(0), "Test failed");
-		assertEquals(new Integer(13), tesstAVL.search("E").get(1), "Test failed");
-		assertEquals(new Integer(14),tesstAVL.search("E").get(2), "Test failed");
+		assertEquals(new Integer(2), testTree.getRoot().getValues().get(0), "Test failed");
+		assertEquals(new Integer(3), testTree.getRoot().getValues().get(1), "Test failed");
+		assertEquals(new Integer(8),testTree.getRoot().getValues().get(2), "Test failed");
+		assertEquals(new Integer(12), testTree.search("E").get(0), "Test failed");
+		assertEquals(new Integer(13), testTree.search("E").get(1), "Test failed");
+		assertEquals(new Integer(14),testTree.search("E").get(2), "Test failed");
 			
+	}
+	
+	@Test
+	public void getGreaterThanTest() {
+		setupScenary6();
+		List<Integer> test = testTree.getGreaterThan("A", 6);
+		assertEquals(6, test.size(), "Test failed");
+		List<Integer> test2 = testTree.getGreaterThan("A", 7);
+		assertEquals(6, test2.size(), "Test failed");
+		List<Integer> test3 = testTree.getGreaterThan("A", 5);
+		assertEquals(5, test3.size(), "Test failed");
+		List<Integer> test4 = testTree.getGreaterThan("B", 3);
+		assertEquals(3, test4.size(), "Test failed");
+	}
+	
+	@Test
+	public void getLowerThanTest() {
+		setupScenary6();
+		List<Integer> test = testTree.getLowestThan("C", 6);
+		assertEquals(6, test.size(), "Test failed");
+		List<Integer> test2 = testTree.getLowestThan("C", 7);
+		assertEquals(6, test2.size(), "Test failed");
+		List<Integer> test3 = testTree.getLowestThan("C", 5);
+		assertEquals(5, test3.size(), "Test failed");
+		List<Integer> test4 = testTree.getLowestThan("B", 3);
+		assertEquals(3, test4.size(), "Test failed");
 	}
 
 }

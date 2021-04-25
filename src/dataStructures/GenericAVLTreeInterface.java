@@ -1,12 +1,12 @@
 package dataStructures;
 
-public interface GenericAVLTreeInterface<K extends Comparable<K>,V> {
+import java.util.List;
+
+public interface GenericAVLTreeInterface<K,V> {
 	
 	public void insert(K k, V v);
-	public V search(K k);
-	public V max();
-	public V min();
-	public V successor(K k);
-	public V predecessor(K k);
-
+	public List<V> search(K k);
+	public List<V> getGreaterThan(K key, Integer maxReturned);
+	public List<V> getLowestThan(K key, Integer maxReturned);
+	
 }
