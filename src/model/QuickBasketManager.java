@@ -152,6 +152,8 @@ public class QuickBasketManager {
 				found = null;
 				break;
 			}
+			
+			break;
 
 		case 6:
 			//Search by player age on lineal list
