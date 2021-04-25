@@ -243,18 +243,18 @@ public class QuickBasketManager {
 		RedBlackGeneralEvaluation.reset();
 	}
 	/**
-	 * This method add a new player 
-	 * @param id
-	 * @param fullName
-	 * @param age
-	 * @param team
-	 * @param pointsPerGame
-	 * @param reboundsPerGame
-	 * @param assistsPerGame
-	 * @param robberiesPerGame
-	 * @param blocksPerGame
-	 * @param generalEvaluation
-	 * @return
+	 * This method adds a new player 
+	 * @param id id of the player
+	 * @param fullName full name of the player
+	 * @param age age of the player
+	 * @param team team of the player
+	 * @param pointsPerGame points per game of the player
+	 * @param reboundsPerGame rebounds per game of the player
+	 * @param assistsPerGame assists per game of the player
+	 * @param robberiesPerGame robberies per game of the player 
+	 * @param blocksPerGame blocks per game of the player
+	 * @param generalEvaluation general evaluation of the player
+	 * @return a String saying if was added or not
 	 * @throws IOException
 	 */
 	public String addNewPlayer(int id, String fullName, int age, String team, double pointsPerGame, double reboundsPerGame,
@@ -273,7 +273,12 @@ public class QuickBasketManager {
 		}	
 		return info;		
 	}
-	
+	/**
+	 * This method deletes a player by his id
+	 * @param id id of the player
+	 * @return a String saying if was deleted or not
+	 * @throws IOException
+	 */
 	public String deletePlayer(int id) throws IOException {
 		int indexFound = 0;
 		String info = "";
@@ -289,7 +294,11 @@ public class QuickBasketManager {
 		}
 		return info;
 	}
-	
+	/**
+	 * This method searches a player by his id
+	 * @param id id of the player
+	 * @return a boolean true if the player is in it, false if he is not
+	 */
 	public boolean binarySearchPlayer(int id) {
 		boolean found = false;
 		int start = 0;
@@ -306,7 +315,11 @@ public class QuickBasketManager {
 		}
 		return found;
 	}
-	
+	/**
+	 * This method searches a player by his id
+	 * @param id id of the player
+	 * @return a int that is the position of the player in the arraylist
+	 */
 	public int binarySearchPlayer2(int id) {
 		boolean found = false;
 		int index = 0;
@@ -328,12 +341,5 @@ public class QuickBasketManager {
 		} else {
 			return -1;
 		}
-	}
-	
-	public String checkImport() {
-		//				return BSTPointsPerGame.preOrder();
-		//				return AVLReboundsPerGame.preOrder();
-		return RedBlackGeneralEvaluation.preOrder();
-
 	}
 }
