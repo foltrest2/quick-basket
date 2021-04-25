@@ -14,7 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import model.Player;
@@ -90,27 +93,29 @@ public class QuickBasketGUI {
 	@FXML
 	private TextField idToDelete;
 	@FXML
-	private TableView<?> playersTable;
+	private TableView<Player> playersTable;
 	@FXML
-	private TableColumn<?, ?> idC;
+	private TableColumn<Player, Integer> idC;
 	@FXML
-	private TableColumn<?, ?> fullnameC;
+	private TableColumn<Player, String> fullnameC;
 	@FXML
-	private TableColumn<?, ?> AgeC;
+	private TableColumn<Player, Integer> AgeC;
 	@FXML
-	private TableColumn<?, ?> teamC;
+	private TableColumn<Player, String> teamC;
 	@FXML
-	private TableColumn<?, ?> pointspergameC;
+	private TableColumn<Player, Double> pointspergameC;
 	@FXML
-	private TableColumn<?, ?> reboundsC;
+	private TableColumn<Player, Double> reboundsC;
 	@FXML
-	private TableColumn<?, ?> assistsC;
+	private TableColumn<Player, Double> assistsC;
 	@FXML
-	private TableColumn<?, ?> robberiesC;
+	private TableColumn<Player, Double> robberiesC;
 	@FXML
-	private TableColumn<?, ?> blocksC;
+	private TableColumn<Player, Double> blocksC;
 	@FXML
-	private TableColumn<?, ?> generalEC;
+	private TableColumn<Player, Double> generalEC;
+
+	private List<Player> returned;
 
 
 	public QuickBasketGUI(QuickBasketManager q) {
@@ -123,8 +128,10 @@ public class QuickBasketGUI {
 		fxmlLoader.setController(this);
 		Parent mainMenu = fxmlLoader.load();
 		basePane.setCenter(mainMenu);
+		qbm.importData();
 		setNotVisible();
-
+		initializechoiceboxconsulttype();
+		initializechoiboxconsultoptions();
 
 	}
 
@@ -160,6 +167,7 @@ public class QuickBasketGUI {
 		deleteBtn.setVisible(false);
 		idToDeleteTxt.setVisible(false);
 		idToDelete.setVisible(false);
+		consultOptions.setVisible(true);
 
 	}
 
@@ -202,7 +210,8 @@ public class QuickBasketGUI {
 	public void consultOperation() {
 
 		double k = Double.parseDouble(referencenumbertxt.getText());
-		List<Player> players = qbm.searchUniqueParameter(consultOptions.getSelectionModel().getSelectedIndex(),k, consulttype.getSelectionModel().getSelectedIndex());
+		System.out.println(consultOptions.getSelectionModel().getSelectedIndex() + " "+consulttype.getSelectionModel().getSelectedIndex() );
+		returned = qbm.searchUniqueParameter(consultOptions.getSelectionModel().getSelectedIndex(),k, consulttype.getSelectionModel().getSelectedIndex());
 
 
 	}
@@ -217,7 +226,7 @@ public class QuickBasketGUI {
 		op.add("General Evaluation");
 		op.add("Age");
 		ObservableList<String> options = FXCollections.observableList(op);
-		consulttype.setItems(options);	
+		consultOptions.setItems(options);	
 	}
 
 
@@ -228,6 +237,42 @@ public class QuickBasketGUI {
 		op.add(">");
 		ObservableList<String> options = FXCollections.observableList(op);
 		consulttype.setItems(options);	
+
+	}
+
+	public void loadPlayerScreen() throws IOException {
+
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("showPlayers.fxml"));
+		fxmlLoader.setController(this);
+		Parent pscreen = fxmlLoader.load();
+		initializeplayersTable();
+		basePane.setCenter(pscreen);
+
+	}
+
+	@FXML
+	void showResult1(ActionEvent event) throws IOException {
+
+		consultOperation();
+		loadPlayerScreen();
+
+	}
+
+	public void initializeplayersTable() {
+
+		ObservableList <Player> oblist;
+		oblist = FXCollections.observableList(returned);
+		playersTable.setItems(oblist);
+		idC.setCellValueFactory(new PropertyValueFactory<Player,Integer>("id"));
+		fullnameC.setCellValueFactory(new PropertyValueFactory<Player,String>("fullName"));
+		AgeC.setCellValueFactory(new PropertyValueFactory<Player,Integer>("age"));
+		teamC.setCellValueFactory(new PropertyValueFactory<Player,String>("team"));
+		pointspergameC.setCellValueFactory(new PropertyValueFactory<Player,Double>("pointsPerGame"));
+		reboundsC.setCellValueFactory(new PropertyValueFactory<Player,Double>("reboundsPerGame"));
+		assistsC.setCellValueFactory(new PropertyValueFactory<Player,Double>("assistsPerGame"));
+		robberiesC.setCellValueFactory(new PropertyValueFactory<Player,Double>("robberiesPerGame"));
+		blocksC.setCellValueFactory(new PropertyValueFactory<Player,Double>("blocksPerGame"));
+		generalEC.setCellValueFactory(new PropertyValueFactory<Player,Double>("generalEvaluation"));
 
 	}
 
@@ -249,14 +294,9 @@ public class QuickBasketGUI {
 	}
 
 	@FXML
-	void showResult1(ActionEvent event) {
-
-	}
-	@FXML
 	void returnP(ActionEvent event) {
 
 	}
-
 
 	@FXML
 	void toChooseConsultType(MouseEvent event) {
@@ -267,7 +307,6 @@ public class QuickBasketGUI {
 	void toChooseOperationType(MouseEvent event) {
 
 	}
-
 
 	@FXML
 	void toDeletePlayer(ActionEvent event) {
