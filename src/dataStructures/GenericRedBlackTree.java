@@ -7,8 +7,15 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 
 	private Node<K,V> root = null;
 
+	/**
+	 * Constructor of an empty red black tree
+	 */
 	public GenericRedBlackTree() {}
 
+	/**
+	 * This method rotates a node to the left considering all the cases
+	 * @param x is the node to rotate
+	 */
 	private void leftRotate(Node<K,V> x){
 		leftRotateFixup(x);
 		Node<K,V> y;
@@ -26,7 +33,10 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 		y.setLeft(x);
 		x.setFather(y);
 	}
-
+	/**
+	 * This method correct the quantity of nodes in each subtree
+	 * @param x is the node to correct
+	 */
 	private void leftRotateFixup(Node<K,V> x){
 		if (isnull(x.getLeft()) && isnull(x.getRight().getLeft())){
 			x.setNumLeft(0);
@@ -47,7 +57,10 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 			x.getRight().setNumLeft(3 + x.getLeft().getNumLeft() + x.getLeft().getNumRight() + x.getRight().getLeft().getNumLeft() + x.getRight().getLeft().getNumRight());
 		}
 	}
-
+	/**
+	 * This method rotates a node to the right considering all the cases
+	 * @param x is the node to rotate
+	 */
 	private void rightRotate(Node<K,V> y){
 		rightRotateFixup(y);
 		Node<K,V> x = y.getLeft();
@@ -64,7 +77,10 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 		x.setRight(y);
 		y.setFather(x);
 	}
-
+	/**
+	 * This method correct the quantity of nodes in each subtree
+	 * @param x is the node to correct
+	 */
 	private void rightRotateFixup(Node<K,V> y){
 		if (isnull(y.getRight()) && isnull(y.getLeft().getRight())){
 			y.setNumRight(0);
@@ -86,11 +102,20 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 					+ y.getLeft().getRight().getNumLeft());
 		}
 	}
-
+	/**
+	 * This method insert a node into the tree
+	 * @param key is the key
+	 * @param value is the value
+	 */
 	public void insert(K key, V value) {
 		insert(new Node<K,V>(key, value), value);
 	}
-
+	/**
+	 * This method creates the links between the node to insert and its respective father
+	 * @param z node to insert
+	 * @param value value of the node
+	 * @return
+	 */
 	private void insert(Node<K,V> z, V value) {
 		Node<K,V> y = null;
 		Node<K,V> x = root;
@@ -122,7 +147,10 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 		z.setColor(Node.RED);
 		insertFixup(z);
 	}
-
+	/**
+	 * This method fixes the colors to conserve the properties of the tree
+	 * @param z node added to fix colors of his parents
+	 */
 	private void insertFixup(Node<K,V> z){
 		Node<K,V> y = null;
 		if (z.getFather() != null) {
@@ -183,7 +211,10 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 			root.setColor(Node.BLACK);
 		}
 	}
-
+	/**
+	 * This method searches a node and returns its values
+	 * @param key is the key of the node searched
+	 */
 	public List<V> search(K key){
 		Node<K,V> current = root;
 		while (!isnull(current)){
@@ -196,7 +227,10 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 		}
 		return null;
 	}
-	
+	/**
+	 * This method searches a node and returns the node
+	 * @param key is the key of the node searched
+	 */
 	private Node<K,V> contains(K key){
 		Node<K,V> current = root;
 		while (!isnull(current)){
@@ -209,7 +243,6 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 		}
 		return null;
 	}
-	
 	/**
 	 * Returns sorted list of keys greater than key.  Size of list
 	 * will not exceed maxReturned
@@ -222,57 +255,83 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 		getGreaterThan(root, key, list);
 		return list.subList(0, Math.min(maxReturned, list.size()));
 	}
-
-	private void getGreaterThan(Node<K,V> node, K key, List<V> list) {
-		if (isnull(node)) {
+	/**
+	 * This method iterates on the tree to find the information required from the nodes
+	 * @param current actual node
+	 * @param key key of the node given by condition
+	 * @param list list to fill with the required elements
+	 */
+	private void getGreaterThan(Node<K,V> current, K key, List<V> list) {
+		if (isnull(current)) {
 			return;
-		} else if (node.getKey().compareTo(key) > 0) {
-			getGreaterThan(node.getLeft(), key, list);
-			list.addAll(node.getValues());
-			getGreaterThan(node.getRight(), key, list);
+		} else if (current.getKey().compareTo(key) > 0) {
+			getGreaterThan(current.getLeft(), key, list);
+			list.addAll(current.getValues());
+			getGreaterThan(current.getRight(), key, list);
 		} else {
-			getGreaterThan(node.getRight(), key, list);
+			getGreaterThan(current.getRight(), key, list);
 		}
 	}
-	
+	/**
+	 * Returns sorted list of keys lower than key.  Size of list
+	 * will not exceed maxReturned
+	 * @param key Key to search for
+	 * @param maxReturned Maximum number of results to return
+	 * @return List of keys lower than key.  List may not exceed maxReturned
+	 */
 	public List<V> getLowestThan(K key, Integer maxReturned) {
 		List<V> list = new ArrayList<>();
 		getLowestThan(root, key, list);
 		return list.subList(0, Math.min(maxReturned, list.size()));
 	}
-
-	private void getLowestThan(Node<K,V> node, K key, List<V> list) {
-		if (isnull(node)) {
+	/**
+	 * This method iterates on the tree to find the information required from the nodes
+	 * @param current actual node
+	 * @param key key of the node given by condition
+	 * @param list list to fill with the required elements
+	 */
+	private void getLowestThan(Node<K,V> current, K key, List<V> list) {
+		if (isnull(current)) {
 			return;
-		} else if (node.getKey().compareTo(key) < 0) {
-			getLowestThan(node.getRight(), key, list);
-			list.addAll(node.getValues());
-			getLowestThan(node.getLeft(), key, list);
+		} else if (current.getKey().compareTo(key) < 0) {
+			getLowestThan(current.getRight(), key, list);
+			list.addAll(current.getValues());
+			getLowestThan(current.getLeft(), key, list);
 		} else {
-			getLowestThan(node.getLeft(), key, list);
+			getLowestThan(current.getLeft(), key, list);
 		}
 	}
-
+	/**
+	 * This method runs the tree and gets all the information from it
+	 */
+	public String preOrder() {
+		return preOrderRecursive(this.root).trim();
+	}
+	/**
+	 * This method iterates through all the tree getting the information from all nodes
+	 * @param root is the first node
+	 * @return String with all the information
+	 */
+	private String preOrderRecursive(Node<K, V> root) {
+		if (root == null) {
+			return "";
+		}
+		String s = "";
+		s += " " + root.getValues().toString();
+		s += preOrderRecursive(root.getLeft());
+		s += preOrderRecursive(root.getRight());
+		return s;	
+	}
 	private boolean isnull(Node<K,V> node){
 		return node == null;		
+	}
+	
+	public Node<K,V> getRoot(){
+		return root;
 	}
 
 	public int size(){
 		return root.getNumLeft() + root.getNumRight() + 1;
 	}
 
-    public String preOrder() {
-        return preOrderRecursive(this.root).trim();
-    }
-    
-    private String preOrderRecursive(Node<K, V> root) {
-    	if (root == null) {
-    		return "";
-    	}
-    	String s = "";
-    	s += " " + root.getValues().toString();
-    	s += preOrderRecursive(root.getLeft());
-    	s += preOrderRecursive(root.getRight());
-    	return s;	
-    }
 }

@@ -20,6 +20,9 @@ public class QuickBasketManager {
 	private final static String SEPARATOR = ",";
 	public final static String SAVE_PATH_FILE = "data/FBAdata.csv";
 
+	/**
+	 * This is the QuickBasketManager constructor
+	 */
 	public QuickBasketManager() {
 		BSTPointsPerGame = new GenericBinarySearchTree<>();
 		AVLReboundsPerGame = new GenericAVLTree<>();
@@ -29,7 +32,7 @@ public class QuickBasketManager {
 		playersList = new ArrayList<>();
 		RedBlackGeneralEvaluation = new GenericRedBlackTree<>();
 	}
-
+	
 	public List<Player> searchUniqueParameter(int option, double key, int searchGreaterThan){
 		List<Player> found = new ArrayList<>();
 		switch (option) {
@@ -204,8 +207,8 @@ public class QuickBasketManager {
 	}
 
 	public String checkImport() {
-//				return BSTPointsPerGame.preOrder();
-//				return AVLReboundsPerGame.preOrder();
+		//				return BSTPointsPerGame.preOrder();
+		//				return AVLReboundsPerGame.preOrder();
 		return RedBlackGeneralEvaluation.preOrder();
 
 	}
