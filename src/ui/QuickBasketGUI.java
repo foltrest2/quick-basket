@@ -207,7 +207,15 @@ public class QuickBasketGUI {
 	public List<Player> consultOperation() {
 
 		double k = Double.parseDouble(referencenumbertxt.getText());
+		double start = System.nanoTime();
 		List<Player> returned = qbm.searchUniqueParameter(consultOptions.getSelectionModel().getSelectedIndex(),k, consulttype.getSelectionModel().getSelectedIndex());
+		double elapsedTime = System.nanoTime() - start;
+		double elapsedTimeFinal = elapsedTime /1000000000;
+		Alert alert= new Alert(AlertType.INFORMATION);
+		alert.setHeaderText("Consult Time");
+		alert.setContentText("Consult time was " +elapsedTimeFinal+ " seconds");
+		alert.showAndWait();
+
 		return returned;
 
 	}
@@ -249,7 +257,6 @@ public class QuickBasketGUI {
 	@FXML
 	void showResult1(ActionEvent event) throws IOException {
 
-		consultOperation();
 		loadPlayerScreen();
 
 	}
@@ -384,7 +391,7 @@ public class QuickBasketGUI {
 
 			showAlertWhenIdAlreadyExists();
 		}else {
-			
+
 			showAlertWhenPlayerIsAdded();
 		}
 
@@ -415,7 +422,7 @@ public class QuickBasketGUI {
 
 			showAlertWhenPlayerDoesntExist();
 		}else {
-			
+
 			showAlertWhenPlayerIsDeleted();
 		}
 
