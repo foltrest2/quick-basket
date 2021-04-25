@@ -150,6 +150,7 @@ public class QuickBasketManager {
 				break;
 			default:
 				found = null;
+				break;
 			}
 
 		case 6:
