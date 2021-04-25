@@ -1,45 +1,35 @@
 package ui;
 
-import java.io.IOException;
-
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import model.QuickBasketManager;
 
-public class Main {
+public class Main extends Application {
 
-	private static QuickBasketManager qbm;
+	private QuickBasketGUI guiItem;
+	private QuickBasketManager qb;
+	
 	public Main() {
+		qb = new QuickBasketManager();
+		guiItem = new QuickBasketGUI(qb);
 	}
-
-	public static void start() {
-		qbm = new QuickBasketManager();
-	}
-
+	
 	public static void main(String[] args) {
-		Main.start();
-		double start = System.nanoTime();
-		try {
-
-			qbm.importData();
-		} catch (IOException e) {	
-			e.printStackTrace();
-		}
-//		System.out.println(qbm.checkImport());
-		
-		//Checking for BST
-//		System.out.println(qbm.searchUniqueParameter(1,2,0));
-//		System.out.println(qbm.searchUniqueParameter(1,149,1));
-//		System.out.println(qbm.searchUniqueParameter(1,150,2));
-		//Checking for AVL
-//		System.out.println(qbm.searchUniqueParameter(2,502,0));
-//		System.out.println(qbm.searchUniqueParameter(2,500,1));
-//		System.out.println(qbm.searchUniqueParameter(2,500,2));
-		//Checking for redBlack
-//		System.out.println(qbm.searchUniqueParameter(6,2,0));
-		System.out.println(qbm.binarySearchPlayer(200000));
-		
-		double elapsedTime = System.nanoTime() - start;
-		double elapsedTimeFinal = elapsedTime /1000000000;
-		System.out.println(elapsedTimeFinal);
+			launch(args);
 	}
-
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("basePane.fxml"));
+		fxmlLoader.setController(guiItem);
+		Parent root = fxmlLoader.load();
+		guiItem.loadMainMenu();
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("Quick Basket");
+		primaryStage.show();
+	}
 }
