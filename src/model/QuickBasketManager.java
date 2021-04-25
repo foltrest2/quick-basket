@@ -144,7 +144,6 @@ public class QuickBasketManager {
 				break;
 			case 1:
 				found = RedBlackGeneralEvaluation.getGreaterThan(key, playersList.size());
-				System.out.println(found.size());
 				break;
 			case 2:
 				found = RedBlackGeneralEvaluation.search(key);
