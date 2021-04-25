@@ -107,7 +107,6 @@ class GenericRedBlackTreeTest {
 		List<Integer> test4 = testTree.getGreaterThan("B", 6);
 		assertEquals(3, test4.size(), "Test failed");
 	}
-	
 	@Test
 	public void getLowerThanTest() {
 		setupScenary5();

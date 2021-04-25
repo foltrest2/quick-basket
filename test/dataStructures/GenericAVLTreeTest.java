@@ -108,7 +108,6 @@ public class GenericAVLTreeTest {
 		assertEquals(new Integer(14),testTree.search("E").get(2), "Test failed");
 			
 	}
-	
 	@Test
 	public void getGreaterThanTest() {
 		setupScenary6();
@@ -117,7 +116,6 @@ public class GenericAVLTreeTest {
 		List<Integer> test4 = testTree.getGreaterThan("B", 9);
 		assertEquals(3, test4.size(), "Test failed");
 	}
-	
 	@Test
 	public void getLowerThanTest() {
 		setupScenary6();
