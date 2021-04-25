@@ -45,7 +45,7 @@ public class QuickBasketManager {
 	public List<Player> searchUniqueParameter(int option, double key, int searchGreaterThan){
 		List<Player> found = new ArrayList<>();
 		switch (option) {
-		case 1:
+		case 0:
 			//Seaarch by pointsPerGame BST tree
 			switch (searchGreaterThan) {
 			case 0:
@@ -63,7 +63,7 @@ public class QuickBasketManager {
 			}
 			break;
 
-		case 2:
+		case 1:
 			//Search by ReboundsPerGame AVL tree
 			switch (searchGreaterThan) {
 			case 0:
@@ -81,7 +81,7 @@ public class QuickBasketManager {
 			}
 
 			break;
-		case 3:
+		case 2:
 			//Search by AssistPerGame AVL tree
 			switch (searchGreaterThan) {
 			case 0:
@@ -99,7 +99,7 @@ public class QuickBasketManager {
 			}
 
 			break;
-		case 4:
+		case 3:
 			//Search by RobberiesPerGame AVL tree
 			switch (searchGreaterThan) {
 			case 0:
@@ -117,7 +117,7 @@ public class QuickBasketManager {
 			}
 
 			break;
-		case 5:
+		case 4:
 			//Search by BlocksPerGame AVL tree
 			switch (searchGreaterThan) {
 			case 0:
@@ -136,7 +136,7 @@ public class QuickBasketManager {
 
 			break;
 
-		case 6:
+		case 5:
 			//Search by generalEvaluation blackRed Tree
 			switch (searchGreaterThan) {
 			case 0:				
@@ -152,7 +152,7 @@ public class QuickBasketManager {
 				found = null;
 			}
 
-		case 7:
+		case 6:
 			//Search by player age on lineal list
 			switch (searchGreaterThan) {
 			case 0:
