@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutY="6.0" prefHeight="619.0" prefWidth="693.0">
+      <AnchorPane layoutX="25.0" layoutY="121.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="711.0" prefWidth="757.0">
          <effect>
             <Glow>
                <input>
@@ -28,7 +28,7 @@
             </Glow>
          </effect>
          <children>
-            <TableView fx:id="playersTable" layoutX="-1.0" layoutY="-1.0" prefHeight="596.0" prefWidth="693.0">
+            <TableView fx:id="playersTable" layoutX="27.0" layoutY="64.0" prefHeight="596.0" prefWidth="693.0">
               <columns>
                 <TableColumn fx:id="idC" prefWidth="48.0" text="ID" />
                 <TableColumn fx:id="fullnameC" prefWidth="81.0" text="FullName" />
@@ -42,7 +42,7 @@
                   <TableColumn fx:id="generalEC" prefWidth="75.0" text="generalEvaluation" />
               </columns>
             </TableView>
-            <Button layoutX="347.0" layoutY="607.0" mnemonicParsing="false" onAction="#returnP" text="Return" />
+            <Button layoutX="348.0" layoutY="673.0" mnemonicParsing="false" onAction="#returnP" text="Return" />
          </children>
       </AnchorPane>
    </children>
