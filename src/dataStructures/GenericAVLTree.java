@@ -266,5 +266,7 @@ public class GenericAVLTree<K extends Comparable<K>,V> implements GenericAVLTree
 	public boolean isEmpty() {
 		return size() == 0;
 	}
-
+    public void reset() {
+    	root = null;
+    }
 }

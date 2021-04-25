@@ -189,4 +189,7 @@ public class GenericBinarySearchTree<K extends Comparable<K>,V> implements Gener
 	public boolean treeIsEmpty() {	
 		return root == null;
 	}
+    public void reset() {
+    	root = null;
+    }
 }

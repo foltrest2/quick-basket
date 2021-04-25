@@ -1,9 +1,12 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import dataStructures.*;
@@ -18,7 +21,7 @@ public class QuickBasketManager {
 	private GenericRedBlackTree<Double,Player> RedBlackGeneralEvaluation;
 	private List<Player> playersList;
 	private final static String SEPARATOR = ",";
-	public final static String SAVE_PATH_FILE = "data/FBAdata.csv";
+	public final static String SAVE_PATH_FILE = "data/FBAdatav2.csv";
 
 	/**
 	 * This is the QuickBasketManager constructor
@@ -184,16 +187,17 @@ public class QuickBasketManager {
 		String line = br.readLine();
 		while(line!=null) {
 			String[] parts = line.split(SEPARATOR);
-			String fullName = parts[0];
-			int age = Integer.parseInt(parts[1]);
-			String team = parts[2];
-			double pointsPerGame = Double.parseDouble(parts[3]);
-			double reboundsPerGame = Double.parseDouble(parts[4]);
-			double assistsPerGame = Double.parseDouble(parts[5]);
-			double robberiesPerGame = Double.parseDouble(parts[6]);
-			double blocksPerGame = Double.parseDouble(parts[7]);
-			double generalEvaluation = Double.parseDouble(parts[8]);
-			Player toAdd = new Player(fullName, age, team, pointsPerGame, reboundsPerGame, assistsPerGame, robberiesPerGame, blocksPerGame, generalEvaluation);
+			int id = Integer.parseInt(parts[0]);
+			String fullName = parts[1];
+			int age = Integer.parseInt(parts[2]);
+			String team = parts[3];
+			double pointsPerGame = Double.parseDouble(parts[4]);
+			double reboundsPerGame = Double.parseDouble(parts[5]);
+			double assistsPerGame = Double.parseDouble(parts[6]);
+			double robberiesPerGame = Double.parseDouble(parts[7]);
+			double blocksPerGame = Double.parseDouble(parts[8]);
+			double generalEvaluation = Double.parseDouble(parts[9]);
+			Player toAdd = new Player(id, fullName, age, team, pointsPerGame, reboundsPerGame, assistsPerGame, robberiesPerGame, blocksPerGame, generalEvaluation);
 			BSTPointsPerGame.put(pointsPerGame, toAdd);
 			AVLReboundsPerGame.insert(reboundsPerGame, toAdd);
 			AVLAssistPerGame.insert(assistsPerGame, toAdd);
@@ -206,6 +210,98 @@ public class QuickBasketManager {
 		br.close();
 	}
 
+	public void exportData() throws FileNotFoundException  {
+		PrintWriter pw = new PrintWriter(SAVE_PATH_FILE);
+		pw.println("id"+SEPARATOR+"FullName"+SEPARATOR+"age"+SEPARATOR+"team"+SEPARATOR+"pointsPerGame"+SEPARATOR+"reboundsPerGame"+SEPARATOR+"assistsPerGame"+SEPARATOR+"robberiesPerGame"+SEPARATOR+"blocksPerGame"+SEPARATOR+"generalEvaluation");
+		for (int i = 0; i < playersList.size(); i++)  {
+				pw.println(playersList.get(i).getId()+SEPARATOR+playersList.get(i).getFullName()+SEPARATOR+playersList.get(i).getAge()+SEPARATOR+playersList.get(i).getTeam()+SEPARATOR+playersList.get(i).getPointsPerGame()+SEPARATOR+playersList.get(i).getReboundsPerGame()+SEPARATOR+playersList.get(i).getAssistsPerGame()+SEPARATOR+playersList.get(i).getRobberiesPerGame()+SEPARATOR+playersList.get(i).getBlocksPerGame()+SEPARATOR+playersList.get(i).getGeneralEvaluation());
+		}
+		pw.close();
+	}
+	
+	public void reset() {
+		BSTPointsPerGame.reset();
+		AVLReboundsPerGame.reset();
+		AVLAssistPerGame.reset();
+		AVLRobberiesPerGame.reset();
+		AVLBlocksPerGame.reset();
+		playersList.clear();
+		RedBlackGeneralEvaluation.reset();
+	}
+	
+	public String addNewPlayer(int id, String fullName, int age, String team, double pointsPerGame, double reboundsPerGame,
+			double assistsPerGame, double robberiesPerGame, double blocksPerGame, double generalEvaluation) throws IOException {
+		String info = "";
+		if(!binarySearchPlayer(id)) {
+			Player toAdd = new Player(id, fullName, age, team, pointsPerGame, reboundsPerGame, assistsPerGame, robberiesPerGame, blocksPerGame, generalEvaluation);
+			playersList.add(toAdd);
+			info += "Player added!";
+			Collections.sort(playersList);
+			exportData();
+			reset();
+			importData();
+		} else {
+			info += "Player already exist!";
+		}	
+		return info;		
+	}
+	
+	public String deletePlayer(int id) throws IOException {
+		int indexFound = 0;
+		String info = "";
+		if((indexFound = binarySearchPlayer2(id)) != -1) {
+			playersList.remove(indexFound);
+			info += "Player with id: "+id+" was deleted!";
+			Collections.sort(playersList);
+			exportData();
+			reset();
+			importData();
+		} else {
+			info += "Player does not exist!";
+		}
+		return info;
+	}
+	
+	public boolean binarySearchPlayer(int id) {
+		boolean found = false;
+		int start = 0;
+		int end = playersList.size()-1;
+		while (!found && start <= end) {
+			int middle = (start + end)/2;
+			if (playersList.get(middle).getId() == id) {
+				found = true;
+			} else if((id - playersList.get(middle).getId()) < 1){
+				end = middle -1;
+			} else {
+				start = middle +1;
+			}			
+		}
+		return found;
+	}
+	
+	public int binarySearchPlayer2(int id) {
+		boolean found = false;
+		int index = 0;
+		int start = 0;
+		int end = playersList.size()-1;
+		while (!found && start <= end) {
+			int middle = (start + end)/2;
+			if (playersList.get(middle).getId() == id) {
+				found = true;
+				index = middle;
+			} else if((id - playersList.get(middle).getId()) < 1){
+				end = middle -1;
+			} else {
+				start = middle +1;
+			}			
+		}
+		if(found) {
+			return index;
+		} else {
+			return -1;
+		}
+	}
+	
 	public String checkImport() {
 		//				return BSTPointsPerGame.preOrder();
 		//				return AVLReboundsPerGame.preOrder();

@@ -333,5 +333,9 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 	public int size(){
 		return root.getNumLeft() + root.getNumRight() + 1;
 	}
+    
+    public void reset() {
+    	root = null;
+    }
 
 }
