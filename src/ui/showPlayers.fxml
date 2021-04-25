@@ -28,7 +28,6 @@
             </Glow>
          </effect>
          <children>
-            <TableView fx:id="playersTable" layoutX="27.0" layoutY="64.0" prefHeight="596.0" prefWidth="693.0">
               <columns>
                 <TableColumn fx:id="idC" prefWidth="48.0" text="ID" />
                 <TableColumn fx:id="fullnameC" prefWidth="81.0" text="FullName" />

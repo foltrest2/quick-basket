@@ -151,6 +151,7 @@ public class QuickBasketManager {
 				break;
 			default:
 				found = null;
+				break;
 			}
 			
 			break;
