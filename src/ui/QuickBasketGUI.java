@@ -232,9 +232,9 @@ public class QuickBasketGUI {
 
 	public void initializechoiceboxconsulttype() {	
 		ArrayList<String> op = new ArrayList<>();
-		op.add("=");
-		op.add("<");
-		op.add(">");
+		op.add("Lower than");
+		op.add("Greater than");
+		op.add("Equals to");
 		ObservableList<String> options = FXCollections.observableList(op);
 		consulttype.setItems(options);	
 

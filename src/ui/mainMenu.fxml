@@ -281,7 +281,7 @@
                </effect>
             </Label>
             <TextField fx:id="idToDelete" layoutX="448.0" layoutY="271.0" prefHeight="25.0" prefWidth="73.0" />
-            <TextField fx:id="referencenumbertxt" layoutX="206.0" layoutY="132.0" prefHeight="25.0" prefWidth="73.0" />
+            <TextField fx:id="referencenumbertxt" layoutX="308.0" layoutY="132.0" prefHeight="25.0" prefWidth="73.0" />
             <Label fx:id="consulttypelabel" layoutX="166.0" layoutY="120.0" prefHeight="49.0" prefWidth="53.0" text="Type" textAlignment="CENTER" textFill="#1a1919" textOverrun="CENTER_WORD_ELLIPSIS">
                <font>
                   <Font name="Britannic Bold" size="14.0" />
@@ -294,7 +294,7 @@
                   </InnerShadow>
                </effect>
             </Label>
-            <ComboBox fx:id="consulttype" layoutX="293.0" layoutY="132.0" prefHeight="25.0" prefWidth="73.0" />
+            <ComboBox fx:id="consulttype" layoutX="219.0" layoutY="132.0" prefHeight="25.0" prefWidth="73.0" />
             <ComboBox fx:id="consultOptions" layoutX="438.0" layoutY="67.0" prefHeight="25.0" prefWidth="73.0" />
          </children>
          <effect>
