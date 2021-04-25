@@ -276,7 +276,7 @@ public class QuickBasketGUI {
 		robberiesC.setCellValueFactory(new PropertyValueFactory<Player,Double>("robberiesPerGame"));
 		blocksC.setCellValueFactory(new PropertyValueFactory<Player,Double>("blocksPerGame"));
 		generalEC.setCellValueFactory(new PropertyValueFactory<Player,Double>("generalEvaluation"));
-
+//		System.out.println(consultOperation());
 	}
 
 	@FXML

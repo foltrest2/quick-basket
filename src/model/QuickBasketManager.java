@@ -32,8 +32,8 @@ public class QuickBasketManager {
 		AVLAssistPerGame  = new GenericAVLTree<>();
 		AVLRobberiesPerGame = new GenericAVLTree<>();
 		AVLBlocksPerGame = new GenericAVLTree<>();
-		playersList = new ArrayList<>();
 		RedBlackGeneralEvaluation = new GenericRedBlackTree<>();
+		playersList = new ArrayList<>();
 	}
 	/**
 	 * This method searches a list of 
@@ -144,6 +144,7 @@ public class QuickBasketManager {
 				break;
 			case 1:
 				found = RedBlackGeneralEvaluation.getGreaterThan(key, playersList.size());
+				System.out.println(found.size());
 				break;
 			case 2:
 				found = RedBlackGeneralEvaluation.search(key);
@@ -151,7 +152,8 @@ public class QuickBasketManager {
 			default:
 				found = null;
 			}
-
+			
+			break;
 		case 6:
 			//Search by player age on lineal list
 			switch (searchGreaterThan) {
@@ -211,7 +213,7 @@ public class QuickBasketManager {
 			AVLReboundsPerGame.insert(reboundsPerGame, toAdd);
 			AVLAssistPerGame.insert(assistsPerGame, toAdd);
 			AVLRobberiesPerGame.insert(robberiesPerGame, toAdd);
-			AVLBlocksPerGame.insert(blocksPerGame, toAdd);
+			AVLBlocksPerGame.insert(blocksPerGame, toAdd); 
 			RedBlackGeneralEvaluation.insert(generalEvaluation, toAdd);
 			playersList.add(toAdd);
 			line = br.readLine();
@@ -239,8 +241,9 @@ public class QuickBasketManager {
 		AVLAssistPerGame.reset();
 		AVLRobberiesPerGame.reset();
 		AVLBlocksPerGame.reset();
-		playersList.clear();
 		RedBlackGeneralEvaluation.reset();
+		playersList.clear();
+
 	}
 	/**
 	 * This method adds a new player 
