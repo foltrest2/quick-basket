@@ -76,11 +76,7 @@ class GenericBinarySearchTreeTest {
 		setupScenary4();
 		List<Integer> test = testTree.getGreaterThan("A", 6);
 		assertEquals(6, test.size(), "Test failed");
-		List<Integer> test2 = testTree.getGreaterThan("A", 7);
-		assertEquals(6, test2.size(), "Test failed");
-		List<Integer> test3 = testTree.getGreaterThan("A", 5);
-		assertEquals(5, test3.size(), "Test failed");
-		List<Integer> test4 = testTree.getGreaterThan("B", 3);
+		List<Integer> test4 = testTree.getGreaterThan("B", 6);
 		assertEquals(3, test4.size(), "Test failed");
 	}
 
@@ -89,11 +85,7 @@ class GenericBinarySearchTreeTest {
 		setupScenary4();
 		List<Integer> test = testTree.getLowestThan("C", 6);
 		assertEquals(6, test.size(), "Test failed");
-		List<Integer> test2 = testTree.getLowestThan("C", 7);
-		assertEquals(6, test2.size(), "Test failed");
-		List<Integer> test3 = testTree.getLowestThan("C", 5);
-		assertEquals(5, test3.size(), "Test failed");
-		List<Integer> test4 = testTree.getLowestThan("B", 3);
+		List<Integer> test4 = testTree.getLowestThan("B", 6);
 		assertEquals(3, test4.size(), "Test failed");
 	}
 }
