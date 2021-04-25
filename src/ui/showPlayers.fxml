@@ -42,7 +42,7 @@
                   <TableColumn fx:id="generalEC" prefWidth="75.0" text="generalEvaluation" />
               </columns>
             </TableView>
-            <Button layoutX="347.0" layoutY="607.0" mnemonicParsing="false" onAction="#returnP" text="return" />
+            <Button layoutX="347.0" layoutY="607.0" mnemonicParsing="false" onAction="#returnP" text="Return" />
          </children>
       </AnchorPane>
    </children>
