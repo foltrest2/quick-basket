@@ -35,7 +35,13 @@ public class QuickBasketManager {
 		playersList = new ArrayList<>();
 		RedBlackGeneralEvaluation = new GenericRedBlackTree<>();
 	}
-	
+	/**
+	 * This method searches a list of 
+	 * @param option is the statistical item
+	 * @param key it's the key of the node searched
+	 * @param searchGreaterThan case of searching, among lower, higher and equals.
+	 * @return a list of player whose comply what we looking for
+	 */
 	public List<Player> searchUniqueParameter(int option, double key, int searchGreaterThan){
 		List<Player> found = new ArrayList<>();
 		switch (option) {
@@ -180,7 +186,10 @@ public class QuickBasketManager {
 		}
 		return found;
 	}
-
+	/**
+	 * This method imports the data from the csv file and fill the trees with it
+	 * @throws IOException
+	 */
 	public void importData() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(SAVE_PATH_FILE));
 		br.readLine();
@@ -209,7 +218,10 @@ public class QuickBasketManager {
 		}
 		br.close();
 	}
-
+	/**
+	 * This method exports the data of all the players as a csv file
+	 * @throws FileNotFoundException
+	 */
 	public void exportData() throws FileNotFoundException  {
 		PrintWriter pw = new PrintWriter(SAVE_PATH_FILE);
 		pw.println("id"+SEPARATOR+"FullName"+SEPARATOR+"age"+SEPARATOR+"team"+SEPARATOR+"pointsPerGame"+SEPARATOR+"reboundsPerGame"+SEPARATOR+"assistsPerGame"+SEPARATOR+"robberiesPerGame"+SEPARATOR+"blocksPerGame"+SEPARATOR+"generalEvaluation");
@@ -218,7 +230,9 @@ public class QuickBasketManager {
 		}
 		pw.close();
 	}
-	
+	/**
+	 * This method deletes the data from all the trees
+	 */
 	public void reset() {
 		BSTPointsPerGame.reset();
 		AVLReboundsPerGame.reset();
@@ -228,7 +242,21 @@ public class QuickBasketManager {
 		playersList.clear();
 		RedBlackGeneralEvaluation.reset();
 	}
-	
+	/**
+	 * This method add a new player 
+	 * @param id
+	 * @param fullName
+	 * @param age
+	 * @param team
+	 * @param pointsPerGame
+	 * @param reboundsPerGame
+	 * @param assistsPerGame
+	 * @param robberiesPerGame
+	 * @param blocksPerGame
+	 * @param generalEvaluation
+	 * @return
+	 * @throws IOException
+	 */
 	public String addNewPlayer(int id, String fullName, int age, String team, double pointsPerGame, double reboundsPerGame,
 			double assistsPerGame, double robberiesPerGame, double blocksPerGame, double generalEvaluation) throws IOException {
 		String info = "";

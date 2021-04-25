@@ -12,6 +12,19 @@ public class Player implements Comparable<Player>{
 	private double blocksPerGame;
 	private double generalEvaluation;
 
+	/**
+	 * Constructor of player
+	 * @param id id of the player
+	 * @param fullName full name of the player
+	 * @param age age of the player
+	 * @param team team of the player
+	 * @param pointsPerGame points per game of the player
+	 * @param reboundsPerGame rebounds per game of the player
+	 * @param assistsPerGame assists per game of the player
+	 * @param robberiesPerGame robberies per game of the player 
+	 * @param blocksPerGame blocks per game of the player
+	 * @param generalEvaluation general evaluation of the player
+	 */
 	public Player(int id, String fullName, int age, String team, double pointsPerGame, double reboundsPerGame,
 			double assistsPerGame, double robberiesPerGame, double blocksPerGame, double generalEvaluation) {
 		this.id = id;
@@ -105,7 +118,9 @@ public class Player implements Comparable<Player>{
 	public void setGeneralEvaluation(double generalEvaluation) {
 		this.generalEvaluation = generalEvaluation;
 	}
-
+	/**
+	 * This method makes a string with all the information of the actual player
+	 */
 	@Override
 	public String toString() {
 		return "Player [id=" + id + ", fullName=" + fullName + ", age=" + age + ", team=" + team + ", pointsPerGame="
