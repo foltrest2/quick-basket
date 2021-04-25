@@ -22,13 +22,11 @@ public class GenericAVLTreeTest {
 		testTree.insert("C", 5);
 		testTree.insert("A", 6);
 	}
-
 	public void setupScenary3() {
 		testTree = new GenericAVLTree<String, Integer>("F", 10);
 		testTree.insert("C", 9);
 		testTree.insert("D", 13);
 	}
-
 	public void setupScenary4() {
 
 		testTree = new GenericAVLTree<String, Integer>("A", 6);
@@ -60,7 +58,6 @@ public class GenericAVLTreeTest {
 		testTree.insert("C", 8);
 		testTree.insert("C", 9);
 	}
-
 	@Test
 	public void InsertTest() {
 		setupScenary1();
@@ -69,7 +66,6 @@ public class GenericAVLTreeTest {
 		assertEquals(new Integer(3), testTree.getRoot().getRight().getValues().get(0), "Test failed");
 		assertEquals("A", testTree.getRoot().getLeft().getKey(), "Test failed");		
 	}
-
 	@Test
 	public void InsertTest2() {
 
@@ -100,7 +96,6 @@ public class GenericAVLTreeTest {
 		assertEquals("A", testTree.getRoot().getLeft().getKey(), "Test failed");
 
 	}
-	
 	@Test
 	public void SearchTest() {
 

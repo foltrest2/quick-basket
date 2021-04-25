@@ -226,7 +226,7 @@ public class QuickBasketManager {
 		PrintWriter pw = new PrintWriter(SAVE_PATH_FILE);
 		pw.println("id"+SEPARATOR+"FullName"+SEPARATOR+"age"+SEPARATOR+"team"+SEPARATOR+"pointsPerGame"+SEPARATOR+"reboundsPerGame"+SEPARATOR+"assistsPerGame"+SEPARATOR+"robberiesPerGame"+SEPARATOR+"blocksPerGame"+SEPARATOR+"generalEvaluation");
 		for (int i = 0; i < playersList.size(); i++)  {
-				pw.println(playersList.get(i).getId()+SEPARATOR+playersList.get(i).getFullName()+SEPARATOR+playersList.get(i).getAge()+SEPARATOR+playersList.get(i).getTeam()+SEPARATOR+playersList.get(i).getPointsPerGame()+SEPARATOR+playersList.get(i).getReboundsPerGame()+SEPARATOR+playersList.get(i).getAssistsPerGame()+SEPARATOR+playersList.get(i).getRobberiesPerGame()+SEPARATOR+playersList.get(i).getBlocksPerGame()+SEPARATOR+playersList.get(i).getGeneralEvaluation());
+			pw.println(playersList.get(i).getId()+SEPARATOR+playersList.get(i).getFullName()+SEPARATOR+playersList.get(i).getAge()+SEPARATOR+playersList.get(i).getTeam()+SEPARATOR+playersList.get(i).getPointsPerGame()+SEPARATOR+playersList.get(i).getReboundsPerGame()+SEPARATOR+playersList.get(i).getAssistsPerGame()+SEPARATOR+playersList.get(i).getRobberiesPerGame()+SEPARATOR+playersList.get(i).getBlocksPerGame()+SEPARATOR+playersList.get(i).getGeneralEvaluation());
 		}
 		pw.close();
 	}
@@ -315,6 +315,7 @@ public class QuickBasketManager {
 		}
 		return found;
 	}
+
 	/**
 	 * This method searches a player by his id
 	 * @param id id of the player
@@ -341,5 +342,8 @@ public class QuickBasketManager {
 		} else {
 			return -1;
 		}
+	}
+	public List<Player> getPlayersListJunitTest() {
+		return playersList;
 	}
 }

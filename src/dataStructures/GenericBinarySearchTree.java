@@ -77,34 +77,6 @@ public class GenericBinarySearchTree<K extends Comparable<K>,V> implements Gener
 		}		
 	}
 	/**
-	 * This method gets the node with the minimum value
-	 * @return
-	 */
-    public Node<K,V> min() {
-    	if (root == null) {
-    		return null;
-    	}
-    	Node<K,V> min = root;
-        while (min.getLeft() != null) {
-        	min = min.getLeft();
-        }
-        return min;
-    }
-    /**
-     * This method gets the node with the maximum value
-     * @return
-     */
-	public Node<K,V> max() {
-    	if (root == null) {
-    		return null;
-    	}
-    	Node<K,V> max = root;
-        while (max.getRight() != null) {
-        	max = max.getRight();
-        }
-        return max;
-    }
-	/**
 	 * Returns sorted list of keys greater than key.  Size of list
 	 * will not exceed maxReturned
 	 * @param key Key to search for
@@ -185,9 +157,6 @@ public class GenericBinarySearchTree<K extends Comparable<K>,V> implements Gener
 	}
 	private boolean isnull(Node<K,V> node){
 		return node == null;		
-	}
-	public boolean treeIsEmpty() {	
-		return root == null;
 	}
     public void reset() {
     	root = null;

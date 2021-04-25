@@ -10,8 +10,9 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 	/**
 	 * Constructor of an empty red black tree
 	 */
-	public GenericRedBlackTree() {}
-
+	public GenericRedBlackTree() {
+		
+	}
 	/**
 	 * This method rotates a node to the left considering all the cases
 	 * @param x is the node to rotate
@@ -325,15 +326,9 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 	private boolean isnull(Node<K,V> node){
 		return node == null;		
 	}
-	
 	public Node<K,V> getRoot(){
 		return root;
 	}
-
-	public int size(){
-		return root.getNumLeft() + root.getNumRight() + 1;
-	}
-    
     public void reset() {
     	root = null;
     }

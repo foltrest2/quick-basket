@@ -8,6 +8,5 @@ public interface GenericBinarySearchTreeInterface<K,V> {
 	public List<V> search(K k);
 	public List<V> getGreaterThan(K key, Integer maxReturned);
 	public List<V> getLowestThan(K key, Integer maxReturned);
-	public String preOrder();
 	
 }

@@ -8,7 +8,5 @@ public interface GenericRedBlackTreeInterface<K,V> {
 	public List<V> search(K key);
 	public List<V> getGreaterThan(K key, Integer maxReturned);
 	public List<V> getLowestThan(K key, Integer maxReturned);
-	public int size();
-	public String preOrder();
 	
 }
