@@ -16,18 +16,18 @@ public class GenericAVLTree<K extends Comparable<K>,V> implements GenericAVLTree
 
 		return root;
 	}
-	private int nodeCount = 0;
-	public int height() {
-		if (root == null) return 0;
-		return root.getHeight();
-	}
-	public int size() {
-		return nodeCount;
-	}
-
-	public boolean isEmpty() {
-		return size() == 0;
-	}
+//	private int nodeCount = 0;
+//	public int height() {
+//		if (root == null) return 0;
+//		return root.getHeight();
+//	}
+//	public int size() {
+//		return nodeCount;
+//	}
+//
+//	public boolean isEmpty() {
+//		return size() == 0;
+//	}
 
 	public List<V> search(K key) {	
 		if(root != null) {
@@ -183,23 +183,9 @@ public class GenericAVLTree<K extends Comparable<K>,V> implements GenericAVLTree
 	private boolean isnull(Node<K,V> node){
 		return node == null;		
 	}
-	
-    public String preOrder() {
-        return preOrderRecursive(this.root).trim();
-    }
-    
-    private String preOrderRecursive(Node<K, V> root) {
-    	if (root == null) {
-    		return "";
-    	}
-    	String s = "";
-    	s += " " + root.getValues().toString();
-    	s += preOrderRecursive(root.getLeft());
-    	s += preOrderRecursive(root.getRight());
-    	return s;	
-    }
     
     public void reset() {
     	root = null;
     }
+
 }

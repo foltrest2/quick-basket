@@ -211,11 +211,11 @@ public class QuickBasketManager {
 		PrintWriter pw = new PrintWriter(SAVE_PATH_FILE);
 		pw.println("id"+SEPARATOR+"FullName"+SEPARATOR+"age"+SEPARATOR+"team"+SEPARATOR+"pointsPerGame"+SEPARATOR+"reboundsPerGame"+SEPARATOR+"assistsPerGame"+SEPARATOR+"robberiesPerGame"+SEPARATOR+"blocksPerGame"+SEPARATOR+"generalEvaluation");
 		for (int i = 0; i < playersList.size(); i++)  {
-				pw.println(playersList.get(i).getId()+SEPARATOR+playersList.get(i).getFullName()+SEPARATOR+playersList.get(i).getAge()+SEPARATOR+playersList.get(i).getTeam()+SEPARATOR+playersList.get(i).getPointsPerGame()+SEPARATOR+playersList.get(i).getReboundsPerGame()+SEPARATOR+playersList.get(i).getAssistsPerGame()+SEPARATOR+playersList.get(i).getRobberiesPerGame()+SEPARATOR+playersList.get(i).getBlocksPerGame()+SEPARATOR+playersList.get(i).getGeneralEvaluation());
+			pw.println(playersList.get(i).getId()+SEPARATOR+playersList.get(i).getFullName()+SEPARATOR+playersList.get(i).getAge()+SEPARATOR+playersList.get(i).getTeam()+SEPARATOR+playersList.get(i).getPointsPerGame()+SEPARATOR+playersList.get(i).getReboundsPerGame()+SEPARATOR+playersList.get(i).getAssistsPerGame()+SEPARATOR+playersList.get(i).getRobberiesPerGame()+SEPARATOR+playersList.get(i).getBlocksPerGame()+SEPARATOR+playersList.get(i).getGeneralEvaluation());
 		}
 		pw.close();
 	}
-	
+
 	public void reset() {
 		BSTPointsPerGame.reset();
 		AVLReboundsPerGame.reset();
@@ -225,7 +225,7 @@ public class QuickBasketManager {
 		playersList.clear();
 		RedBlackGeneralEvaluation.reset();
 	}
-	
+
 	public String addNewPlayer(int id, String fullName, int age, String team, double pointsPerGame, double reboundsPerGame,
 			double assistsPerGame, double robberiesPerGame, double blocksPerGame, double generalEvaluation) throws IOException {
 		String info = "";
@@ -242,7 +242,7 @@ public class QuickBasketManager {
 		}	
 		return info;		
 	}
-	
+
 	public String deletePlayer(int id) throws IOException {
 		int indexFound = 0;
 		String info = "";
@@ -258,7 +258,7 @@ public class QuickBasketManager {
 		}
 		return info;
 	}
-	
+
 	public boolean binarySearchPlayer(int id) {
 		boolean found = false;
 		int start = 0;
@@ -275,7 +275,7 @@ public class QuickBasketManager {
 		}
 		return found;
 	}
-	
+
 	public int binarySearchPlayer2(int id) {
 		boolean found = false;
 		int index = 0;
@@ -298,11 +298,8 @@ public class QuickBasketManager {
 			return -1;
 		}
 	}
-	
-	public String checkImport() {
-//				return BSTPointsPerGame.preOrder();
-//				return AVLReboundsPerGame.preOrder();
-		return RedBlackGeneralEvaluation.preOrder();
 
+	public List<Player> getPlayersListJunitTest() {
+		return playersList;
 	}
 }

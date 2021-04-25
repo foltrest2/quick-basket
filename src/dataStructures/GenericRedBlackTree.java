@@ -256,25 +256,6 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 	private boolean isnull(Node<K,V> node){
 		return node == null;		
 	}
-
-	public int size(){
-		return root.getNumLeft() + root.getNumRight() + 1;
-	}
-
-    public String preOrder() {
-        return preOrderRecursive(this.root).trim();
-    }
-    
-    private String preOrderRecursive(Node<K, V> root) {
-    	if (root == null) {
-    		return "";
-    	}
-    	String s = "";
-    	s += " " + root.getValues().toString();
-    	s += preOrderRecursive(root.getLeft());
-    	s += preOrderRecursive(root.getRight());
-    	return s;	
-    }
     
     public void reset() {
     	root = null;

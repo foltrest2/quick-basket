@@ -56,12 +56,4 @@ class GenericBinarySearchTreeTest {
         assertEquals(new Integer(4), testTree.search("D").get(0), "Test failed");
         assertEquals(new Integer(6), testTree.search("E").get(1), "Test failed");
     }
-    
-    @Test
-    public void MaxMinTest() {
-        setupScenary3();
-        assertEquals("A", testTree.min().getKey(), "Test failed");
-        assertEquals("U", testTree.max().getKey(), "Test failed");
-    }
-
 }
