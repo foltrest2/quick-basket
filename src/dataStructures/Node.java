@@ -19,7 +19,11 @@ public class Node<K extends Comparable<K>,V> {
 	private int balancef;
 	private List<V> values;
 
-
+	/**
+	 * Constructor of Node
+	 * @param key is the key
+	 * @param value is the value
+	 */
 	public Node(K key, V value) {
 		this.key = key;
 		numLeft = 0;
