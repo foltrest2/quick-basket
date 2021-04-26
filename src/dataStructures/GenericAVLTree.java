@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenericAVLTree<K extends Comparable<K>,V> implements GenericAVLTreeInterface<K, V>{
-
-	private int nodeCount = 0;
  
 	private Node<K,V> root;
 	/**
@@ -234,16 +232,6 @@ public class GenericAVLTree<K extends Comparable<K>,V> implements GenericAVLTree
 	}
 	public Node<K,V> getRoot(){
 		return root;
-	}
-	public int height() {
-		if (root == null) return 0;
-		return root.getHeight();
-	}
-	public int size() {
-		return nodeCount;
-	}
-	public boolean isEmpty() {
-		return size() == 0;
 	}
     public void reset() {
     	root = null;
