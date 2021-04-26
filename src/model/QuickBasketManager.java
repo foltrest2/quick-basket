@@ -190,7 +190,7 @@ public class QuickBasketManager {
 	}
 	/**
 	 * This method imports the data from the csv file and fill the trees with it
-	 * @throws IOException
+	 * @throws IOException if a problem to import occurs
 	 */
 	public void importData() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(SAVE_PATH_FILE));
@@ -222,7 +222,7 @@ public class QuickBasketManager {
 	}
 	/**
 	 * This method exports the data of all the players as a csv file
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException if file does not exist
 	 */
 	public void exportData() throws FileNotFoundException  {
 		PrintWriter pw = new PrintWriter(SAVE_PATH_FILE);
@@ -258,7 +258,7 @@ public class QuickBasketManager {
 	 * @param blocksPerGame blocks per game of the player
 	 * @param generalEvaluation general evaluation of the player
 	 * @return a String saying if was added or not
-	 * @throws IOException
+	 * @throws IOException if an error occurs during import or export
 	 */
 	public String addNewPlayer(int id, String fullName, int age, String team, double pointsPerGame, double reboundsPerGame,
 			double assistsPerGame, double robberiesPerGame, double blocksPerGame, double generalEvaluation) throws IOException {
@@ -280,7 +280,7 @@ public class QuickBasketManager {
 	 * This method deletes a player by his id
 	 * @param id id of the player
 	 * @return a String saying if was deleted or not
-	 * @throws IOException
+	 * @throws IOException if an error occurs during import or export
 	 */
 	public String deletePlayer(int id) throws IOException {
 		int indexFound = 0;

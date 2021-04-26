@@ -302,27 +302,6 @@ public class GenericRedBlackTree<K extends Comparable<K>, V> implements GenericR
 			getLowestThan(current.getLeft(), key, list);
 		}
 	}
-	/**
-	 * This method runs the tree and gets all the information from it
-	 */
-	public String preOrder() {
-		return preOrderRecursive(this.root).trim();
-	}
-	/**
-	 * This method iterates through all the tree getting the information from all nodes
-	 * @param root is the first node
-	 * @return String with all the information
-	 */
-	private String preOrderRecursive(Node<K, V> root) {
-		if (root == null) {
-			return "";
-		}
-		String s = "";
-		s += " " + root.getValues().toString();
-		s += preOrderRecursive(root.getLeft());
-		s += preOrderRecursive(root.getRight());
-		return s;	
-	}
 	private boolean isnull(Node<K,V> node){
 		return node == null;		
 	}
