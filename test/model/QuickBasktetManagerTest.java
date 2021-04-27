@@ -44,7 +44,6 @@ class QuickBasktetManagerTest {
 		}
 		assertFalse(qbm.binarySearchPlayer(200003));
 	}
-	
 	@Test
 	public void resetTest1() {
 		setupScenary1();

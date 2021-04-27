@@ -104,26 +104,15 @@ class GenericRedBlackTreeTest {
 		setupScenary5();
 		List<Integer> test = testTree.getGreaterThan("A", 9);
 		assertEquals(6, test.size(), "Test failed");
-		List<Integer> testa = testTree.getGreaterThan("A", 0);
-		assertEquals(0, testa.size(), "Test failed");
-		List<Integer> test2 = testTree.getGreaterThan("A", 7);
-		assertEquals(6, test2.size(), "Test failed");
-		List<Integer> test3 = testTree.getGreaterThan("A", 5);
-		assertEquals(5, test3.size(), "Test failed");
-		List<Integer> test4 = testTree.getGreaterThan("B", 3);
+		List<Integer> test4 = testTree.getGreaterThan("B", 6);
 		assertEquals(3, test4.size(), "Test failed");
 	}
-	
 	@Test
 	public void getLowerThanTest() {
 		setupScenary5();
 		List<Integer> test = testTree.getLowestThan("C", 6);
 		assertEquals(6, test.size(), "Test failed");
-		List<Integer> test2 = testTree.getLowestThan("C", 7);
-		assertEquals(6, test2.size(), "Test failed");
-		List<Integer> test3 = testTree.getLowestThan("C", 5);
-		assertEquals(5, test3.size(), "Test failed");
-		List<Integer> test4 = testTree.getLowestThan("B", 3);
+		List<Integer> test4 = testTree.getLowestThan("B", 6);
 		assertEquals(3, test4.size(), "Test failed");
 	}
 }

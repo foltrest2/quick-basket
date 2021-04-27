@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenericAVLTree<K extends Comparable<K>,V> implements GenericAVLTreeInterface<K, V>{
-
-	private int nodeCount = 0;
-
+ 
 	private Node<K,V> root;
 	/**
 	 * This is the constructor of a generic AVL tree with null root
@@ -229,42 +227,11 @@ public class GenericAVLTree<K extends Comparable<K>,V> implements GenericAVLTree
 			getLowestThan(current.getLeft(), key, list);
 		}
 	}
-	/**
-	 * This method runs the tree and gets all the information from it
-	 */
-	public String preOrder() {
-		return preOrderRecursive(this.root).trim();
-	}
-	/**
-	 * This method iterates through all the tree getting the information from all nodes
-	 * @param root is the first node
-	 * @return String with all the information
-	 */
-	private String preOrderRecursive(Node<K, V> root) {
-		if (root == null) {
-			return "";
-		}
-		String s = "";
-		s += " " + root.getValues().toString();
-		s += preOrderRecursive(root.getLeft());
-		s += preOrderRecursive(root.getRight());
-		return s;	
-	}
 	private boolean isnull(Node<K,V> node){
 		return node == null;		
 	}
 	public Node<K,V> getRoot(){
 		return root;
-	}
-	public int height() {
-		if (root == null) return 0;
-		return root.getHeight();
-	}
-	public int size() {
-		return nodeCount;
-	}
-	public boolean isEmpty() {
-		return size() == 0;
 	}
     public void reset() {
     	root = null;

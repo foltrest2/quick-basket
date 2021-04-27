@@ -32,8 +32,8 @@ public class QuickBasketManager {
 		AVLAssistPerGame  = new GenericAVLTree<>();
 		AVLRobberiesPerGame = new GenericAVLTree<>();
 		AVLBlocksPerGame = new GenericAVLTree<>();
-		playersList = new ArrayList<>();
 		RedBlackGeneralEvaluation = new GenericRedBlackTree<>();
+		playersList = new ArrayList<>();
 	}
 	/**
 	 * This method searches a list of 
@@ -45,7 +45,7 @@ public class QuickBasketManager {
 	public List<Player> searchUniqueParameter(int option, double key, int searchGreaterThan){
 		List<Player> found = new ArrayList<>();
 		switch (option) {
-		case 1:
+		case 0:
 			//Seaarch by pointsPerGame BST tree
 			switch (searchGreaterThan) {
 			case 0:
@@ -63,7 +63,7 @@ public class QuickBasketManager {
 			}
 			break;
 
-		case 2:
+		case 1:
 			//Search by ReboundsPerGame AVL tree
 			switch (searchGreaterThan) {
 			case 0:
@@ -81,7 +81,7 @@ public class QuickBasketManager {
 			}
 
 			break;
-		case 3:
+		case 2:
 			//Search by AssistPerGame AVL tree
 			switch (searchGreaterThan) {
 			case 0:
@@ -99,7 +99,7 @@ public class QuickBasketManager {
 			}
 
 			break;
-		case 4:
+		case 3:
 			//Search by RobberiesPerGame AVL tree
 			switch (searchGreaterThan) {
 			case 0:
@@ -117,7 +117,7 @@ public class QuickBasketManager {
 			}
 
 			break;
-		case 5:
+		case 4:
 			//Search by BlocksPerGame AVL tree
 			switch (searchGreaterThan) {
 			case 0:
@@ -136,7 +136,7 @@ public class QuickBasketManager {
 
 			break;
 
-		case 6:
+		case 5:
 			//Search by generalEvaluation blackRed Tree
 			switch (searchGreaterThan) {
 			case 0:				
@@ -150,9 +150,11 @@ public class QuickBasketManager {
 				break;
 			default:
 				found = null;
+				break;
 			}
-
-		case 7:
+			
+			break;
+		case 6:
 			//Search by player age on lineal list
 			switch (searchGreaterThan) {
 			case 0:
@@ -188,7 +190,7 @@ public class QuickBasketManager {
 	}
 	/**
 	 * This method imports the data from the csv file and fill the trees with it
-	 * @throws IOException
+	 * @throws IOException if a problem to import occurs
 	 */
 	public void importData() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(SAVE_PATH_FILE));
@@ -211,7 +213,7 @@ public class QuickBasketManager {
 			AVLReboundsPerGame.insert(reboundsPerGame, toAdd);
 			AVLAssistPerGame.insert(assistsPerGame, toAdd);
 			AVLRobberiesPerGame.insert(robberiesPerGame, toAdd);
-			AVLBlocksPerGame.insert(blocksPerGame, toAdd);
+			AVLBlocksPerGame.insert(blocksPerGame, toAdd); 
 			RedBlackGeneralEvaluation.insert(generalEvaluation, toAdd);
 			playersList.add(toAdd);
 			line = br.readLine();
@@ -220,7 +222,7 @@ public class QuickBasketManager {
 	}
 	/**
 	 * This method exports the data of all the players as a csv file
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException if file does not exist
 	 */
 	public void exportData() throws FileNotFoundException  {
 		PrintWriter pw = new PrintWriter(SAVE_PATH_FILE);
@@ -239,8 +241,9 @@ public class QuickBasketManager {
 		AVLAssistPerGame.reset();
 		AVLRobberiesPerGame.reset();
 		AVLBlocksPerGame.reset();
-		playersList.clear();
 		RedBlackGeneralEvaluation.reset();
+		playersList.clear();
+
 	}
 	/**
 	 * This method adds a new player 
@@ -255,7 +258,7 @@ public class QuickBasketManager {
 	 * @param blocksPerGame blocks per game of the player
 	 * @param generalEvaluation general evaluation of the player
 	 * @return a String saying if was added or not
-	 * @throws IOException
+	 * @throws IOException if an error occurs during import or export
 	 */
 	public String addNewPlayer(int id, String fullName, int age, String team, double pointsPerGame, double reboundsPerGame,
 			double assistsPerGame, double robberiesPerGame, double blocksPerGame, double generalEvaluation) throws IOException {
@@ -277,7 +280,7 @@ public class QuickBasketManager {
 	 * This method deletes a player by his id
 	 * @param id id of the player
 	 * @return a String saying if was deleted or not
-	 * @throws IOException
+	 * @throws IOException if an error occurs during import or export
 	 */
 	public String deletePlayer(int id) throws IOException {
 		int indexFound = 0;
