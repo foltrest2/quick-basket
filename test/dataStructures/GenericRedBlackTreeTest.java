@@ -102,8 +102,10 @@ class GenericRedBlackTreeTest {
 	@Test
 	public void getGreaterThanTest() {
 		setupScenary5();
-		List<Integer> test = testTree.getGreaterThan("A", 6);
+		List<Integer> test = testTree.getGreaterThan("A", 9);
 		assertEquals(6, test.size(), "Test failed");
+		List<Integer> testa = testTree.getGreaterThan("A", 0);
+		assertEquals(0, testa.size(), "Test failed");
 		List<Integer> test2 = testTree.getGreaterThan("A", 7);
 		assertEquals(6, test2.size(), "Test failed");
 		List<Integer> test3 = testTree.getGreaterThan("A", 5);
